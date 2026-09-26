@@ -1,0 +1,8 @@
+[
+  {"pergunta": "Qual é o prazo?", "esperado": "prazo"},
+  {"pergunta": "Quando começa?", "esperado": "prazo"},
+  {"pergunta": "Qual é o pagamento?", "esperado": "pagamento"},
+  {"pergunta": "Quando vence o pagamento?", "esperado": "pagamento"},
+  {"pergunta": "Como cancelar?", "esperado": "rescisao"},
+  {"pergunta": "Qual é o objeto?", "esperado": "objeto"}
+]
