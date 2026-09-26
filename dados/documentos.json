@@ -1,0 +1,6 @@
+[
+  {"id": "objeto", "texto": "Objeto: organização de documentos digitais para o cliente fictício."},
+  {"id": "prazo", "texto": "Prazo: doze meses, com início em janeiro de 2026."},
+  {"id": "pagamento", "texto": "Pagamento: quinhentos reais por mês, com vencimento no dia dez."},
+  {"id": "rescisao", "texto": "Rescisão: aviso escrito com trinta dias de antecedência."}
+]
