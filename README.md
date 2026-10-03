@@ -84,7 +84,7 @@ zero aparece como `null`, sem produzir uma nota perfeita.
 
 `cosine_reference` calcula vetores lexicais em Python: **não é execução pgvector**.
 O relatório `resultado_reserva.json` marca `database_executed: false`.
-Nesta execução local, nove testes passaram e dois testes PostgreSQL foram
+Nesta execução local, dez testes passaram e dois testes PostgreSQL foram
 ignorados porque Docker não estava disponível. O resultado pgvector 7/7 acima
 é o registro do experimento anterior incorporado pela PR, não uma nova medição.
 A CI `pgvector.yml` habilita ambos os testes reais, incluindo paridade da reserva
@@ -101,3 +101,8 @@ Gitleaks fixado, fixtures e scan do histórico completo disponível estão
 documentados em [docs/segredos-ci.md](docs/segredos-ci.md). O job privilegiado
 usa apenas script/política da base confiável e lê a PR como dados; seu bootstrap
 não equivale a check obrigatório já homologado.
+
+A inicialização agora espera TCP em `127.0.0.1` e usa o mesmo host no psql.
+O servidor temporário de initdb pode aceitar socket Unix antes do restart final;
+essa condição foi observada na primeira CI composta. A regressão de protocolo
+reproduz a falha anterior sob simulação e conserva o teste real como gate.

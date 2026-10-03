@@ -74,18 +74,20 @@ def run(questions=None):
     try:
         for _ in range(60):
             try:
-                command(['docker', 'exec', name, 'pg_isready', '-U', 'postgres'])
+                # Initdb usa servidor temporário só em socket Unix. TCP loopback
+                # só fica pronto no servidor definitivo após o restart do init.
+                command(['docker', 'exec', name, 'pg_isready', '-U', 'postgres', '-h', '127.0.0.1'])
                 break
             except subprocess.CalledProcessError:
                 time.sleep(0.25)
         else:
             raise RuntimeError('Postgres não ficou pronto')
-        output = command(['docker', 'exec', '-i', name, 'psql', '-U', 'postgres', '-XAtq',
+        output = command(['docker', 'exec', '-i', name, 'psql', '-U', 'postgres', '-h', '127.0.0.1', '-XAtq',
                           '-v', 'ON_ERROR_STOP=1'], input=sql_experiment(documents, questions))
         obtained = [json.loads(line)['obtido'] for line in output.splitlines()]
         if len(obtained) != len(questions):
             raise RuntimeError('Saída SQL incompleta')
-        version = command(['docker', 'exec', name, 'psql', '-U', 'postgres', '-XAtq', '-c',
+        version = command(['docker', 'exec', name, 'psql', '-U', 'postgres', '-h', '127.0.0.1', '-XAtq', '-c',
                            "SELECT extversion FROM pg_extension WHERE extname='vector'"]).strip()
         rows = []
         for case, result in zip(questions, obtained):
