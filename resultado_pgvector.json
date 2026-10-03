@@ -1,0 +1,63 @@
+{
+  "image": "pgvector/pgvector@sha256:3e8b3adfd27b5707128f60956f62a793c3c9326ea8cfaf0eab7adccb5d700b21",
+  "pgvector_version": "0.8.1",
+  "representation": "bag-of-words binário normalizado + equivalências existentes; sem embedding semântico",
+  "search": "cosseno exato, score > 0, desempate por id; sem índice ANN",
+  "cases": [
+    {
+      "pergunta": "Qual é o prazo?",
+      "esperado": "prazo",
+      "literal": "prazo",
+      "equivalencias": "prazo",
+      "pgvector": "prazo"
+    },
+    {
+      "pergunta": "Quando começa?",
+      "esperado": "prazo",
+      "literal": null,
+      "equivalencias": "prazo",
+      "pgvector": "prazo"
+    },
+    {
+      "pergunta": "Qual é o pagamento?",
+      "esperado": "pagamento",
+      "literal": "pagamento",
+      "equivalencias": "pagamento",
+      "pgvector": "pagamento"
+    },
+    {
+      "pergunta": "Quando vence o pagamento?",
+      "esperado": "pagamento",
+      "literal": "pagamento",
+      "equivalencias": "pagamento",
+      "pgvector": "pagamento"
+    },
+    {
+      "pergunta": "Como cancelar?",
+      "esperado": "rescisao",
+      "literal": null,
+      "equivalencias": "rescisao",
+      "pgvector": "rescisao"
+    },
+    {
+      "pergunta": "Qual é o objeto?",
+      "esperado": "objeto",
+      "literal": "objeto",
+      "equivalencias": "objeto",
+      "pgvector": "objeto"
+    },
+    {
+      "pergunta": "Qual é a cor do logotipo?",
+      "esperado": null,
+      "literal": null,
+      "equivalencias": null,
+      "pgvector": null
+    }
+  ],
+  "scores": {
+    "literal": 5,
+    "equivalencias": 7,
+    "pgvector": 7
+  },
+  "total": 7
+}

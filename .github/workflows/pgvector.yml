@@ -1,0 +1,14 @@
+name: Experimento pgvector isolado
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  comparar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - run: docker pull pgvector/pgvector@sha256:3e8b3adfd27b5707128f60956f62a793c3c9326ea8cfaf0eab7adccb5d700b21
+      - run: PGVECTOR_TESTS=1 python3 -m unittest discover -v

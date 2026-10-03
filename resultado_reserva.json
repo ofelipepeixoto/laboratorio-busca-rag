@@ -1,0 +1,210 @@
+{
+  "database_executed": false,
+  "limits": [
+    "Cosine reference is stdlib arithmetic, not a pgvector integration run.",
+    "No embeddings, LLM, legal correctness or generated answer support is measured.",
+    "Reserve defined before this run; no dictionary/ranking changes made from its results."
+  ],
+  "methods": {
+    "cosine_reference": {
+      "cases": [
+        {
+          "categoria": "parafrase",
+          "esperado": "prazo",
+          "obtido": null,
+          "pergunta": "Quando se inicia a vigência?"
+        },
+        {
+          "categoria": "parafrase",
+          "esperado": "pagamento",
+          "obtido": "pagamento",
+          "pergunta": "Em que dia vence?"
+        },
+        {
+          "categoria": "direta",
+          "esperado": "rescisao",
+          "obtido": "rescisao",
+          "pergunta": "Qual é a antecedência da rescisão?"
+        },
+        {
+          "categoria": "trecho_insuficiente",
+          "esperado": null,
+          "obtido": "rescisao",
+          "pergunta": "Qual é a multa de rescisão?"
+        },
+        {
+          "categoria": "ausente",
+          "esperado": null,
+          "obtido": null,
+          "pergunta": "Existe exclusividade?"
+        },
+        {
+          "categoria": "ausente",
+          "esperado": null,
+          "obtido": null,
+          "pergunta": "Qual é a cor do logotipo?"
+        },
+        {
+          "categoria": "direta",
+          "esperado": "objeto",
+          "obtido": "objeto",
+          "pergunta": "Qual é o objeto do contrato?"
+        },
+        {
+          "categoria": "direta",
+          "esperado": "prazo",
+          "obtido": "prazo",
+          "pergunta": "Qual é o prazo do contrato vigente?"
+        }
+      ],
+      "metrics": {
+        "abstained": 3,
+        "abstention_precision": 0.6666666666666666,
+        "abstention_recall": 0.6666666666666666,
+        "answerable": 5,
+        "correct_abstentions": 2,
+        "correct_citations": 4,
+        "emitted_citations": 5,
+        "precision_at_1": 0.8,
+        "recall_at_1": 0.8,
+        "total": 8,
+        "unsupported": 3,
+        "unsupported_false_positive_rate": 0.3333333333333333
+      }
+    },
+    "equivalencias": {
+      "cases": [
+        {
+          "categoria": "parafrase",
+          "esperado": "prazo",
+          "obtido": null,
+          "pergunta": "Quando se inicia a vigência?"
+        },
+        {
+          "categoria": "parafrase",
+          "esperado": "pagamento",
+          "obtido": "pagamento",
+          "pergunta": "Em que dia vence?"
+        },
+        {
+          "categoria": "direta",
+          "esperado": "rescisao",
+          "obtido": "rescisao",
+          "pergunta": "Qual é a antecedência da rescisão?"
+        },
+        {
+          "categoria": "trecho_insuficiente",
+          "esperado": null,
+          "obtido": "rescisao",
+          "pergunta": "Qual é a multa de rescisão?"
+        },
+        {
+          "categoria": "ausente",
+          "esperado": null,
+          "obtido": null,
+          "pergunta": "Existe exclusividade?"
+        },
+        {
+          "categoria": "ausente",
+          "esperado": null,
+          "obtido": null,
+          "pergunta": "Qual é a cor do logotipo?"
+        },
+        {
+          "categoria": "direta",
+          "esperado": "objeto",
+          "obtido": "objeto",
+          "pergunta": "Qual é o objeto do contrato?"
+        },
+        {
+          "categoria": "direta",
+          "esperado": "prazo",
+          "obtido": "prazo",
+          "pergunta": "Qual é o prazo do contrato vigente?"
+        }
+      ],
+      "metrics": {
+        "abstained": 3,
+        "abstention_precision": 0.6666666666666666,
+        "abstention_recall": 0.6666666666666666,
+        "answerable": 5,
+        "correct_abstentions": 2,
+        "correct_citations": 4,
+        "emitted_citations": 5,
+        "precision_at_1": 0.8,
+        "recall_at_1": 0.8,
+        "total": 8,
+        "unsupported": 3,
+        "unsupported_false_positive_rate": 0.3333333333333333
+      }
+    },
+    "literal": {
+      "cases": [
+        {
+          "categoria": "parafrase",
+          "esperado": "prazo",
+          "obtido": null,
+          "pergunta": "Quando se inicia a vigência?"
+        },
+        {
+          "categoria": "parafrase",
+          "esperado": "pagamento",
+          "obtido": "pagamento",
+          "pergunta": "Em que dia vence?"
+        },
+        {
+          "categoria": "direta",
+          "esperado": "rescisao",
+          "obtido": "rescisao",
+          "pergunta": "Qual é a antecedência da rescisão?"
+        },
+        {
+          "categoria": "trecho_insuficiente",
+          "esperado": null,
+          "obtido": "rescisao",
+          "pergunta": "Qual é a multa de rescisão?"
+        },
+        {
+          "categoria": "ausente",
+          "esperado": null,
+          "obtido": null,
+          "pergunta": "Existe exclusividade?"
+        },
+        {
+          "categoria": "ausente",
+          "esperado": null,
+          "obtido": null,
+          "pergunta": "Qual é a cor do logotipo?"
+        },
+        {
+          "categoria": "direta",
+          "esperado": "objeto",
+          "obtido": "objeto",
+          "pergunta": "Qual é o objeto do contrato?"
+        },
+        {
+          "categoria": "direta",
+          "esperado": "prazo",
+          "obtido": "prazo",
+          "pergunta": "Qual é o prazo do contrato vigente?"
+        }
+      ],
+      "metrics": {
+        "abstained": 3,
+        "abstention_precision": 0.6666666666666666,
+        "abstention_recall": 0.6666666666666666,
+        "answerable": 5,
+        "correct_abstentions": 2,
+        "correct_citations": 4,
+        "emitted_citations": 5,
+        "precision_at_1": 0.8,
+        "recall_at_1": 0.8,
+        "total": 8,
+        "unsupported": 3,
+        "unsupported_false_positive_rate": 0.3333333333333333
+      }
+    }
+  },
+  "reserved_sha256": "c8d877589c52238779cf2cdcdb3a217d88a688a90e8f8efa963971fce81ce1df",
+  "scope": "synthetic_reserved_retrieval_only"
+}
