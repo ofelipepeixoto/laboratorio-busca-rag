@@ -1,0 +1,10 @@
+[
+  {"pergunta": "Quando se inicia a vigência?", "esperado": "prazo", "categoria": "parafrase"},
+  {"pergunta": "Em que dia vence?", "esperado": "pagamento", "categoria": "parafrase"},
+  {"pergunta": "Qual é a antecedência da rescisão?", "esperado": "rescisao", "categoria": "direta"},
+  {"pergunta": "Qual é a multa de rescisão?", "esperado": null, "categoria": "trecho_insuficiente"},
+  {"pergunta": "Existe exclusividade?", "esperado": null, "categoria": "ausente"},
+  {"pergunta": "Qual é a cor do logotipo?", "esperado": null, "categoria": "ausente"},
+  {"pergunta": "Qual é o objeto do contrato?", "esperado": "objeto", "categoria": "direta"},
+  {"pergunta": "Qual é o prazo do contrato vigente?", "esperado": "prazo", "categoria": "direta"}
+]

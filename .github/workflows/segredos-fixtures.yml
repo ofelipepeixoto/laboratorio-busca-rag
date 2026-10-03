@@ -1,0 +1,19 @@
+name: Fixtures do controle de segredos
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  fixtures:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Obter scanner fixado
+        run: bash scripts/install_gitleaks.sh "${RUNNER_TEMP}/radar-gitleaks"
+      - name: Fixtures locais sem provedores
+        env:
+          RADAR_GITLEAKS_BINARY: ${{ runner.temp }}/radar-gitleaks/gitleaks
+        run: python3 -m unittest discover -s tests -p test_secrets.py -v

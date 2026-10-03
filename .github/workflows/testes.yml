@@ -6,6 +6,9 @@ jobs:
   testes:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - run: python3 -m unittest -v test_busca.py
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - run: python3 -m unittest discover -v
       - run: python3 busca.py
+      - run: python3 avaliar_reserva.py
