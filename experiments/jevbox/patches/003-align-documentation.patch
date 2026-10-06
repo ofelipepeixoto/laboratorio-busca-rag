@@ -1,0 +1,61 @@
+diff --git a/README.md b/README.md
+index 84bad6a..36fd1d9 100644
+--- a/README.md
++++ b/README.md
+@@ -67,11 +67,11 @@ PostgreSQL stores accounts, sessions, document metadata, parsed output, and chat
+ 
+ ## Capabilities
+ 
+-- Personal API keys and REST usage documentation in **Settings → API keys**, with MCP connection guides and connected apps in **Settings → MCP**. The versioned read-only API and MCP server use current document permissions and accept API-key or OAuth authentication. See [API and MCP access](docs/api-access.md).
++- Personal API keys and REST usage documentation in **Settings → API keys**, with MCP connection guides and connected apps in **Settings → MCP**. The versioned API and MCP server support scoped reads, search, and private uploads using current document permissions and accept API-key or OAuth authentication. See [API and MCP access](docs/api-access.md).
+ 
+ - Better Auth email/password authentication with mailbox verification, password recovery, and signed HttpOnly session cookies.
+ - Better Auth organizations and emailed invitations, admin/member role management, member removal, organization switching, and admin-only settings. Membership acceptance requires a verified matching email and atomic SpiceDB publication.
+-- Nested categories and uploads up to 30 MB, durable indexing jobs, retries, and persistent document content.
++- Nested categories and uploads up to 250 MB, durable indexing jobs, retries, and persistent document content.
+ - Select documents and choose **Organize** to queue classification, with durable progress and failures visible in the library. Existing paths are preferred; new branches are proposed and validated when needed.
+ - Automatic filing of new uploads: JEV walks existing folders, keeps uncertain documents in a suitable parent, and validates occasional model-proposed branches. Uploads also trigger bounded reviews of related documents using their cached indexes; manual placements remain fixed. Administrators can disable filing or select an inexpensive naming model in Connections. See [automatic filing](docs/organization.md).
+ - Fixed icon rail, Jevbox identity, Nucleo icons, compact breadcrumbs, and light/dark themes with Retina hairlines.
+diff --git a/docs/api-access.md b/docs/api-access.md
+index 30c4f61..3a10eee 100644
+--- a/docs/api-access.md
++++ b/docs/api-access.md
+@@ -23,7 +23,7 @@ Send `Authorization: Bearer <key>` to `/api/v1`. Cookie sessions are not accepte
+ 
+ `documentIds` optionally narrows search to up to 50 accessible documents. An optional `folderId` searches only accessible descendants of that folder. Combining both takes their intersection; an empty folder returns no results. `limit` is between 1 and 12. Queries are limited to 2,000 characters.
+ 
+-The response's `results` contain an `id`, `documentId`, `nodeId`, `passageId`, `name`, `title`, `content`, `page`, `endPage`, `blockIds`, `url`, usefulness `score`, and `routeScore`. Route scores rank traversal paths and are not calibrated answer-confidence values. Search uses the organization's configured TypeSafe connection and the same bounded hierarchical retrieval as the app. Results may be empty and are not exhaustive.
++The response's `results` contain an `id`, `documentId`, `nodeId`, `passageId`, `name`, `title`, `content`, `page`, `endPage`, `blockIds`, `url`, usefulness `score`, and `routeScore`. Route scores rank traversal paths and are not calibrated answer-confidence values. Search uses the organization's configured TypeSafe or Cloudflare Clef connection and the same bounded hierarchical retrieval as the app. Results may be empty and are not exhaustive.
+ 
+ `GET /api/v1/documents/:id?organizationId=<organization UUID>` returns source `text`, a section `tree`, page/block references, and a URL. The ID can be a document UUID or an `id` returned by search. Optional `nodeId` selects a section. `offset` and `limit` page through text; limits are at most 24,000 characters, with a default of 12,000. Continue from `nextOffset` until it is null. Unindexed documents return 409.
+ 
+@@ -53,7 +53,7 @@ The creator owns the document. It starts Private even inside a shared folder, an
+ 
+ Any file extension is accepted, with a hard limit of 250 MB (250,000,000 bytes) per file. Filenames are limited to 160 characters and cannot contain paths, control characters, colons, or a leading dot. MIME is derived by the server. UTF-8 text and code index locally; other content is sent to Extend, which determines whether it can be parsed. Files are not executed, and raw downloads use the existing permission checks and sandbox headers.
+ 
+-Missing, expired, or revoked credentials return 401. Insufficient OAuth scopes return 403. Inaccessible organizations, documents, folders, and sections return 404. Permission-service failures return 503. Oversized uploads return 413, compressed request bodies return 415, and admission/quota limits return 429 with Retry-After. Invalid request metadata returns 400; upload timeouts return 408. Authenticated browser, REST, and MCP requests share a 100,000-read and 100,000-write allowance per minute per user. API keys additionally allow 100,000 requests per minute per key. Search is limited to 10,000 requests per minute per user and credential, with no organization-wide cap. Invalid credentials use a separate IP limit; authenticated users do not share an IP request bucket. Search can consume provider credits. Limits are configurable through [deployment settings](deployment.md#request-and-upload-limits).
++Missing, expired, or revoked credentials return 401. Insufficient OAuth scopes return 403. Inaccessible organizations, documents, folders, and sections return 404. Permission-service failures return 503. Oversized uploads return 413, compressed request bodies return 415, and admission/quota limits return 429 with Retry-After. Invalid request metadata returns 400; upload timeouts return 408. Authenticated browser, REST, and MCP requests default to a shared allowance of 1,200 reads and 120 writes per minute per user, configurable through API_READ_LIMIT_PER_MINUTE and API_WRITE_LIMIT_PER_MINUTE. The API-key plugin config defaults to 600 requests per minute for newly created keys; review persisted limits on older keys after migrations. External searches default to 20 requests per minute per user, 20 per credential, and 100 per organization. Invalid credentials use a separate IP limit; authenticated users do not share an IP request bucket. Search can consume provider credits. Limits are configurable through [deployment settings](deployment.md#request-and-upload-limits).
+ 
+ ## MCP
+ 
+diff --git a/docs/security.md b/docs/security.md
+index 9d71358..15dfcb6 100644
+--- a/docs/security.md
++++ b/docs/security.md
+@@ -20,7 +20,7 @@ Production signup is disabled unless `ALLOW_SIGNUP=true`. The first account can
+ 
+ ## Chat and retrieval
+ 
+-JEV ranks only resources visible to the caller. Search traverses nested category → document → section candidates with parallel sibling questions and length-normalized path scores. Alternative routes are explored when the first beam provides too little useful evidence. Retrieved source passages receive independent usefulness scores; routing probabilities are not evidence confidence. Retrieval is bounded and returns at most twelve passages within a 24,000-character context budget; it is not an exhaustive proof that no other relevant source exists. A TypeSafe key is required. Provider failures never fall back to unfiltered content, keyword matching, or embeddings.
++JEV ranks only resources visible to the caller. Search traverses nested category → document → section candidates with parallel sibling questions and length-normalized path scores. Alternative routes are explored when the first beam provides too little useful evidence. Retrieved source passages receive independent usefulness scores; routing probabilities are not evidence confidence. Retrieval is bounded and returns at most twelve passages within a 24,000-character context budget; it is not an exhaustive proof that no other relevant source exists. A TypeSafe or Cloudflare Clef connection is required. Provider failures never fall back to unfiltered content, keyword matching, or embeddings.
+ 
+ Indexing preserves page and block references and stores structural outlines without calling chat providers. Document outlines and passage text are checked under that document's permission; they are not copied into shared category descriptions. Chat models generate conversational answers and occasional generic folder definitions for automatic filing. Large sibling sets form intermediate routing groups whose descriptions are rebuilt from currently accessible children. Permissions are rechecked before routing, before and after passage scoring, and before returning results and paths.
+ 
+@@ -58,6 +58,6 @@ The Better Auth migration retains user IDs, organization memberships, and docume
+ 
+ ## Native authentication integration
+ 
+-The browser uses Better Auth’s clients for organization membership, invitations, API keys, and OAuth consent management. The authorization server is the Better Auth MCP/OAuth provider. It issues opaque access tokens, and protected APIs use the provider’s live token validation and DPoP binding utilities. Disconnecting a client deletes its access and refresh tokens through the native adapter in the same transaction as native consent deletion. There is no separate JWT verifier, revocation table, or authentication throttle implementation. Application hooks enforce signup admission, verified accounts, read-only key permissions, administrative safeguards, auditing, and SpiceDB synchronization. Email transport and post-login navigation remain application integrations.
++The browser uses Better Auth’s clients for organization membership, invitations, API keys, and OAuth consent management. The authorization server is the Better Auth MCP/OAuth provider. It issues opaque access tokens, and protected APIs use the provider’s live token validation and DPoP binding utilities. Disconnecting a client deletes its access and refresh tokens through the native adapter in the same transaction as native consent deletion. There is no separate JWT verifier, revocation table, or authentication throttle implementation. Application hooks enforce signup admission, verified accounts, key permissions including private uploads for newly created keys, administrative safeguards, auditing, and SpiceDB synchronization. Email transport and post-login navigation remain application integrations.
+ 
+ The native-auth migration replaces the old rate-limit storage and revocation table. Previously issued JWT access tokens require reconnection. Interrupted chat work using the old session identifier format requires an explicit retry. Legacy password compatibility is temporary: hashes upgrade at successful sign-in; it cannot be removed until those credentials have migrated or been reset.

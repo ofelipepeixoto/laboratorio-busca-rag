@@ -1,0 +1,98 @@
+name: Validar extração seletiva Jevbox
+
+on:
+  push:
+    paths: ["experiments/jevbox/**", "experiments/__init__.py", ".github/workflows/jevbox-extract.yml", "busca.py"]
+  pull_request:
+    paths: ["experiments/jevbox/**", "experiments/__init__.py", ".github/workflows/jevbox-extract.yml", "busca.py"]
+
+permissions:
+  contents: read
+
+jobs:
+  integration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        python: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          path: lab
+          persist-credentials: false
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          repository: ofelipepeixoto/assistente-documental-ia
+          ref: df532b43801f51fc132debf92fa7e1a140bc1342
+          path: documental
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Instalar contratos fixados e parser com hash
+        run: |
+          python -m pip install --no-deps -r lab/experiments/jevbox/requirements.txt
+          python -m pip install --require-hashes -r documental/requirements-pdf.txt
+          python -m pip install ruff==0.15.8
+      - name: Testar composição real e reproduzir avaliação congelada
+        working-directory: lab
+        env:
+          RADAR_REQUIRE_DOCUMENTAL: "1"
+          RADAR_DOCUMENTAL_PATH: ${{ github.workspace }}/documental
+        run: |
+          python -m experiments.jevbox.verify_sources
+          python -m unittest discover -s experiments/jevbox/tests -v
+          python -m experiments.jevbox.evaluate --check
+          ruff check experiments/jevbox
+
+  upstream-patches:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          path: lab
+          persist-credentials: false
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          repository: extend-hq/jevbox
+          ref: aaa9381bcdca4dc7c383ab6778cb8aece72b9e3e
+          path: upstream
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: "24"
+      - name: Validar origem e aplicar os três patches no checkout descartável
+        working-directory: lab
+        run: |
+          python3 -m experiments.jevbox.verify_sources --upstream ../upstream
+          git -C ../upstream apply --check "$GITHUB_WORKSPACE"/lab/experiments/jevbox/patches/*.patch
+          git -C ../upstream apply "$GITHUB_WORKSPACE"/lab/experiments/jevbox/patches/*.patch
+      - name: Instalar dependências fixadas sem hooks
+        working-directory: upstream
+        run: |
+          npm install --global --ignore-scripts pnpm@12.9.1
+          pnpm install --frozen-lockfile --ignore-scripts
+      - name: Preparar serviços locais isolados e browser
+        working-directory: upstream
+        run: |
+          pnpm setup:local
+          pnpm services:up
+          pnpm exec playwright install --with-deps --only-shell chromium
+      - name: Executar regressões e suíte completa do candidato
+        working-directory: upstream
+        run: |
+          AUDIT_TARGET=. node --import tsx --test ../lab/experiments/jevbox/probes/provider-http.test.mjs
+          pnpm test
+      - name: Tipos, build e advisories
+        working-directory: upstream
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+        run: |
+          pnpm build
+          pnpm audit --audit-level=high
+      - name: Encerrar apenas os serviços descartáveis do runner
+        if: always()
+        working-directory: upstream
+        run: docker compose down -v

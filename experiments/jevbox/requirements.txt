@@ -1,0 +1,2 @@
+# Optional experiment. Core lab commands still use only the Python stdlib.
+radar-evidence-kit @ git+https://github.com/ofelipepeixoto/radar-evidence-kit.git@a81f29b43f780d7f83be257be3de99213d2437ea

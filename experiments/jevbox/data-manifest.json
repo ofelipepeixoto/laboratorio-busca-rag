@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "frozen_before_first_run": true,
+  "files": {
+    "data/corpus.json": "19769db9fef17446456ed7a4ecb1d20a31a8dd8efcb430f1dac04e9594eda34f",
+    "data/development.json": "51b3e7aa2f7008cf8007933e35f05e4ce1f2a135b21a4e80797031b7aa7f06f9",
+    "data/reserved.json": "73631ca5f2d65cc0ec36bdd5bf94f086d626f6f97d7c39e2384435b57c9b84e5"
+  },
+  "protocol": {
+    "methods": [
+      "flat",
+      "hierarchical"
+    ],
+    "query_terms": "existing busca.termos(expandir=True)",
+    "passage_chars": 512,
+    "overlap": 64,
+    "top_k": 3,
+    "beam_width": 2,
+    "minimum_term_coverage": 1.0,
+    "tuning_on_reserved": false,
+    "scope": "synthetic offline retrieval; no model or legal evaluation"
+  }
+}

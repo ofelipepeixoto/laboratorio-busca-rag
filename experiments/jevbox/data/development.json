@@ -1,0 +1,6 @@
+[
+  {"id":"dev-01","query":"pagamento mensal","relevant":["b-comercial:1"]},
+  {"id":"dev-02","query":"fontes verificadas","relevant":["c-fontes:1"]},
+  {"id":"dev-03","query":"antecedência trinta dias","relevant":["d-operacao:2"]},
+  {"id":"dev-04","query":"orçamento satélite","relevant":[]}
+]

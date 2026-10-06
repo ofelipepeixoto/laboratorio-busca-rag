@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "upstream": {
+    "repository": "https://github.com/extend-hq/jevbox",
+    "commit": "aaa9381bcdca4dc7c383ab6778cb8aece72b9e3e",
+    "license": "MIT; CrowdView Inc, dba Extend",
+    "extracted_function": "server/beam-search.ts::extendRoute (score formula only)",
+    "source_file_sha256": "a58d1c1985c7546638c7097c73b13d30646d1f3fa865fd122adc74a8c452beae"
+  },
+  "exclusions": [
+    "Nucleo icons",
+    "UI assets",
+    "provider credentials",
+    "private repository code"
+  ],
+  "files": {
+    "patches/001-bound-provider-json.patch": "716364a29531687e3e69202512b4e9b836e6daeb3a26f6ebcf5b2457ce04a574",
+    "patches/002-source-map-js.patch": "ce333e874e3df3ad200a02927fa77338ef170bd2edf78f6a733deeefad73a251",
+    "patches/003-align-documentation.patch": "d00281982f2eda04a13007323c22869a140d7725d12a7330a78a52af008ec728",
+    "probes/provider-http.test.mjs": "78e431c29b195b959ec5fad59a0dc3c6d0b87f82de4d7948e52a1aa5e601a6f1",
+    "route_score.py": "6262e9c62e29cc6ee671f9e496b4fe2597eb32fbe5510464553b6ced4c29307f",
+    "third_party/JEVBOX-LICENSE.txt": "78e4b2782631c4fbfe2ff05485ef2c35a105e7857401842dfa0447c1bff75ea5"
+  },
+  "consumers": {
+    "radar-evidence-kit": "a81f29b43f780d7f83be257be3de99213d2437ea",
+    "assistente-documental-ia": "df532b43801f51fc132debf92fa7e1a140bc1342"
+  }
+}

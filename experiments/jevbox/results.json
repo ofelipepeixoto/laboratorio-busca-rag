@@ -1,0 +1,479 @@
+{
+  "schema_version": 1,
+  "scope": "synthetic_offline_retrieval_only",
+  "protocol": {
+    "methods": [
+      "flat",
+      "hierarchical"
+    ],
+    "query_terms": "existing busca.termos(expandir=True)",
+    "passage_chars": 512,
+    "overlap": 64,
+    "top_k": 3,
+    "beam_width": 2,
+    "minimum_term_coverage": 1.0,
+    "tuning_on_reserved": false,
+    "scope": "synthetic offline retrieval; no model or legal evaluation"
+  },
+  "input_sha256": {
+    "data/corpus.json": "19769db9fef17446456ed7a4ecb1d20a31a8dd8efcb430f1dac04e9594eda34f",
+    "data/development.json": "51b3e7aa2f7008cf8007933e35f05e4ce1f2a135b21a4e80797031b7aa7f06f9",
+    "data/reserved.json": "73631ca5f2d65cc0ec36bdd5bf94f086d626f6f97d7c39e2384435b57c9b84e5"
+  },
+  "documents": 6,
+  "passages": 12,
+  "external_model_calls": 0,
+  "model_api_cost_usd": 0,
+  "financial_reconciliation": "not_applicable_no_provider_calls",
+  "production_authorized": false,
+  "limitations": [
+    "page-level manual synthetic labels; not semantic entailment",
+    "lexical proxy does not execute Jevbox choose or an LLM",
+    "no real identity, customer data, concurrency or scale validation",
+    "all benchmark pages fit in one window; long-window quality not measured"
+  ],
+  "splits": {
+    "development": {
+      "flat": {
+        "metrics": {
+          "cases": 4,
+          "top1_accuracy": 1.0,
+          "citation_precision_at_3": 1.0,
+          "page_recall_at_3": 1.0,
+          "retrieval_coverage": 0.75,
+          "answerable_abstention_rate": 0.0,
+          "unanswerable_correct_abstention_rate": 1.0,
+          "integrity_rate": 1.0
+        },
+        "cases": [
+          {
+            "id": "dev-01",
+            "relevant": [
+              "b-comercial:1"
+            ],
+            "retrieved": [
+              "b-comercial:1"
+            ],
+            "evidence_ids": [
+              "dee0707324e8e69be5142df6740d9fb5a642aa71238e886d1c0a1f949fd76646"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "dev-02",
+            "relevant": [
+              "c-fontes:1"
+            ],
+            "retrieved": [
+              "c-fontes:1"
+            ],
+            "evidence_ids": [
+              "9cb182c49a198d032d7a1ec86adbe67f441e8543ad93bf3dc26aa212880a60f7"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "dev-03",
+            "relevant": [
+              "d-operacao:2"
+            ],
+            "retrieved": [
+              "d-operacao:2"
+            ],
+            "evidence_ids": [
+              "0a410ca24f03c92bc671a8672d3c2810217c371b5459d081d85b48ef9fe87de4"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "dev-04",
+            "relevant": [],
+            "retrieved": [],
+            "evidence_ids": [],
+            "integrity_valid": true
+          }
+        ]
+      },
+      "hierarchical": {
+        "metrics": {
+          "cases": 4,
+          "top1_accuracy": 1.0,
+          "citation_precision_at_3": 1.0,
+          "page_recall_at_3": 1.0,
+          "retrieval_coverage": 0.75,
+          "answerable_abstention_rate": 0.0,
+          "unanswerable_correct_abstention_rate": 1.0,
+          "integrity_rate": 1.0
+        },
+        "cases": [
+          {
+            "id": "dev-01",
+            "relevant": [
+              "b-comercial:1"
+            ],
+            "retrieved": [
+              "b-comercial:1"
+            ],
+            "evidence_ids": [
+              "dee0707324e8e69be5142df6740d9fb5a642aa71238e886d1c0a1f949fd76646"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "dev-02",
+            "relevant": [
+              "c-fontes:1"
+            ],
+            "retrieved": [
+              "c-fontes:1"
+            ],
+            "evidence_ids": [
+              "9cb182c49a198d032d7a1ec86adbe67f441e8543ad93bf3dc26aa212880a60f7"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "dev-03",
+            "relevant": [
+              "d-operacao:2"
+            ],
+            "retrieved": [
+              "d-operacao:2"
+            ],
+            "evidence_ids": [
+              "0a410ca24f03c92bc671a8672d3c2810217c371b5459d081d85b48ef9fe87de4"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "dev-04",
+            "relevant": [],
+            "retrieved": [],
+            "evidence_ids": [],
+            "integrity_valid": true
+          }
+        ]
+      }
+    },
+    "reserved": {
+      "flat": {
+        "metrics": {
+          "cases": 12,
+          "top1_accuracy": 0.8333333333333334,
+          "citation_precision_at_3": 0.6923076923076923,
+          "page_recall_at_3": 1.0,
+          "retrieval_coverage": 0.75,
+          "answerable_abstention_rate": 0.0,
+          "unanswerable_correct_abstention_rate": 1.0,
+          "integrity_rate": 1.0
+        },
+        "cases": [
+          {
+            "id": "res-01",
+            "relevant": [
+              "b-comercial:1"
+            ],
+            "retrieved": [
+              "b-comercial:1"
+            ],
+            "evidence_ids": [
+              "dee0707324e8e69be5142df6740d9fb5a642aa71238e886d1c0a1f949fd76646"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-02",
+            "relevant": [
+              "b-comercial:1"
+            ],
+            "retrieved": [
+              "b-comercial:1"
+            ],
+            "evidence_ids": [
+              "dee0707324e8e69be5142df6740d9fb5a642aa71238e886d1c0a1f949fd76646"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-03",
+            "relevant": [
+              "c-fontes:1"
+            ],
+            "retrieved": [
+              "c-fontes:1"
+            ],
+            "evidence_ids": [
+              "9cb182c49a198d032d7a1ec86adbe67f441e8543ad93bf3dc26aa212880a60f7"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-04",
+            "relevant": [
+              "z-boletim:1"
+            ],
+            "retrieved": [
+              "a-editorial:2",
+              "b-comercial:2",
+              "z-boletim:1"
+            ],
+            "evidence_ids": [
+              "25235a8598db10675b084608878c6b0a02521f804ad299201a410fc8d6767811",
+              "76ac67a5025f49ac4cf8ade2ab070ce63f2f974bfcc1c620044810141dc4ebe6",
+              "da0ecb67823f980fab83fb913b5a262a695cea0957b91397f31b80ea4876a71c"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-05",
+            "relevant": [
+              "e-seguranca:2"
+            ],
+            "retrieved": [
+              "a-editorial:2",
+              "b-comercial:2",
+              "e-seguranca:2"
+            ],
+            "evidence_ids": [
+              "25235a8598db10675b084608878c6b0a02521f804ad299201a410fc8d6767811",
+              "76ac67a5025f49ac4cf8ade2ab070ce63f2f974bfcc1c620044810141dc4ebe6",
+              "20c5db7e27459e22ee6b6269b96c3dca49bbb734e5dc50219ee6da77531d5893"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-06",
+            "relevant": [
+              "e-seguranca:1"
+            ],
+            "retrieved": [
+              "e-seguranca:1"
+            ],
+            "evidence_ids": [
+              "53a861871bd9f9b62ebccddf13c220744b7401c0543d14b4625a2f13521d3b34"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-07",
+            "relevant": [
+              "d-operacao:2"
+            ],
+            "retrieved": [
+              "d-operacao:2"
+            ],
+            "evidence_ids": [
+              "0a410ca24f03c92bc671a8672d3c2810217c371b5459d081d85b48ef9fe87de4"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-08",
+            "relevant": [],
+            "retrieved": [],
+            "evidence_ids": [],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-09",
+            "relevant": [
+              "d-operacao:1"
+            ],
+            "retrieved": [
+              "d-operacao:1"
+            ],
+            "evidence_ids": [
+              "4618db3c5141f13eeaebc429969ead1433cd83ccc7bc345aaabf57e74b5509b2"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-10",
+            "relevant": [],
+            "retrieved": [],
+            "evidence_ids": [],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-11",
+            "relevant": [
+              "c-fontes:2"
+            ],
+            "retrieved": [
+              "c-fontes:2"
+            ],
+            "evidence_ids": [
+              "d27f06594c718398c84835ed11e00d10b4d6c614ed141074dd740b5920b75f2d"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-12",
+            "relevant": [],
+            "retrieved": [],
+            "evidence_ids": [],
+            "integrity_valid": true
+          }
+        ]
+      },
+      "hierarchical": {
+        "metrics": {
+          "cases": 12,
+          "top1_accuracy": 0.8333333333333334,
+          "citation_precision_at_3": 0.6363636363636364,
+          "page_recall_at_3": 0.7777777777777778,
+          "retrieval_coverage": 0.75,
+          "answerable_abstention_rate": 0.0,
+          "unanswerable_correct_abstention_rate": 1.0,
+          "integrity_rate": 1.0
+        },
+        "cases": [
+          {
+            "id": "res-01",
+            "relevant": [
+              "b-comercial:1"
+            ],
+            "retrieved": [
+              "b-comercial:1"
+            ],
+            "evidence_ids": [
+              "dee0707324e8e69be5142df6740d9fb5a642aa71238e886d1c0a1f949fd76646"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-02",
+            "relevant": [
+              "b-comercial:1"
+            ],
+            "retrieved": [
+              "b-comercial:1"
+            ],
+            "evidence_ids": [
+              "dee0707324e8e69be5142df6740d9fb5a642aa71238e886d1c0a1f949fd76646"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-03",
+            "relevant": [
+              "c-fontes:1"
+            ],
+            "retrieved": [
+              "c-fontes:1"
+            ],
+            "evidence_ids": [
+              "9cb182c49a198d032d7a1ec86adbe67f441e8543ad93bf3dc26aa212880a60f7"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-04",
+            "relevant": [
+              "z-boletim:1"
+            ],
+            "retrieved": [
+              "a-editorial:2",
+              "b-comercial:2"
+            ],
+            "evidence_ids": [
+              "25235a8598db10675b084608878c6b0a02521f804ad299201a410fc8d6767811",
+              "76ac67a5025f49ac4cf8ade2ab070ce63f2f974bfcc1c620044810141dc4ebe6"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-05",
+            "relevant": [
+              "e-seguranca:2"
+            ],
+            "retrieved": [
+              "a-editorial:2",
+              "b-comercial:2"
+            ],
+            "evidence_ids": [
+              "25235a8598db10675b084608878c6b0a02521f804ad299201a410fc8d6767811",
+              "76ac67a5025f49ac4cf8ade2ab070ce63f2f974bfcc1c620044810141dc4ebe6"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-06",
+            "relevant": [
+              "e-seguranca:1"
+            ],
+            "retrieved": [
+              "e-seguranca:1"
+            ],
+            "evidence_ids": [
+              "53a861871bd9f9b62ebccddf13c220744b7401c0543d14b4625a2f13521d3b34"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-07",
+            "relevant": [
+              "d-operacao:2"
+            ],
+            "retrieved": [
+              "d-operacao:2"
+            ],
+            "evidence_ids": [
+              "0a410ca24f03c92bc671a8672d3c2810217c371b5459d081d85b48ef9fe87de4"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-08",
+            "relevant": [],
+            "retrieved": [],
+            "evidence_ids": [],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-09",
+            "relevant": [
+              "d-operacao:1"
+            ],
+            "retrieved": [
+              "d-operacao:1"
+            ],
+            "evidence_ids": [
+              "4618db3c5141f13eeaebc429969ead1433cd83ccc7bc345aaabf57e74b5509b2"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-10",
+            "relevant": [],
+            "retrieved": [],
+            "evidence_ids": [],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-11",
+            "relevant": [
+              "c-fontes:2"
+            ],
+            "retrieved": [
+              "c-fontes:2"
+            ],
+            "evidence_ids": [
+              "d27f06594c718398c84835ed11e00d10b4d6c614ed141074dd740b5920b75f2d"
+            ],
+            "integrity_valid": true
+          },
+          {
+            "id": "res-12",
+            "relevant": [],
+            "retrieved": [],
+            "evidence_ids": [],
+            "integrity_valid": true
+          }
+        ]
+      }
+    }
+  },
+  "reserved_non_regression": false,
+  "decision": "retain_flat_baseline; hierarchy_remains_experimental"
+}
