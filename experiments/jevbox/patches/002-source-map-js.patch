@@ -1,0 +1,80 @@
+diff --git a/pnpm-lock.yaml b/pnpm-lock.yaml
+index 5f462f3..ea90067 100644
+--- a/pnpm-lock.yaml
++++ b/pnpm-lock.yaml
+@@ -164,6 +164,7 @@ settings:
+ 
+ overrides:
+   '@pierre/trees>@pierre/theming': 1.0.1
++  source-map-js: 1.2.2
+ 
+ patchedDependencies:
+   metal-fx@2.0.11: 2aeaba05ce086020e396b86fc697aff20f69e4c33bd41013c897a659151cffda
+@@ -3622,8 +3623,8 @@ packages:
+     resolution: {integrity: sha512-6x6dK6zJdpTzF4sQeNYxwtvBzf6Eg4GtlesS94HOvTudUeyK2WXAaIfmDgsyslYrRBeFIlsi54AYsFGUuhmvrQ==}
+     engines: {node: '>= 0.4'}
+ 
+-  source-map-js@1.2.1:
+-    resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
++  source-map-js@1.2.2:
++    resolution: {integrity: sha512-KGj/8Y43x35aZVDtt+J4mK1hoLGHULMYfSkODJNQjNDC3oW1PqPoxMwo0pLUsWM/UEGzON/NxeHywEfNXNP3Vw==}
+     engines: {node: '>=0.10.0'}
+ 
+   space-separated-tokens@2.0.2:
+@@ -5191,7 +5192,7 @@ snapshots:
+       jiti: 2.7.0
+       lightningcss: 1.32.0
+       magic-string: 0.30.21
+-      source-map-js: 1.2.1
++      source-map-js: 1.2.2
+       tailwindcss: 4.3.3
+ 
+   '@tailwindcss/oxide-android-arm64@4.3.3':
+@@ -5606,7 +5607,7 @@ snapshots:
+       '@vue/shared': 3.5.43
+       entities: 7.0.1
+       estree-walker: 2.0.2
+-      source-map-js: 1.2.1
++      source-map-js: 1.2.2
+ 
+   '@vue/compiler-dom@3.5.43':
+     dependencies:
+@@ -5623,7 +5624,7 @@ snapshots:
+       estree-walker: 2.0.2
+       magic-string: 0.30.21
+       postcss: 8.5.28
+-      source-map-js: 1.2.1
++      source-map-js: 1.2.2
+ 
+   '@vue/compiler-ssr@3.5.43':
+     dependencies:
+@@ -6902,7 +6903,7 @@ snapshots:
+     dependencies:
+       nanoid: 3.3.19
+       picocolors: 1.1.1
+-      source-map-js: 1.2.1
++      source-map-js: 1.2.2
+ 
+   postgres-array@2.0.0: {}
+ 
+@@ -7294,7 +7295,7 @@ snapshots:
+       side-channel-map: 1.0.1
+       side-channel-weakmap: 1.0.2
+ 
+-  source-map-js@1.2.1: {}
++  source-map-js@1.2.2: {}
+ 
+   space-separated-tokens@2.0.2: {}
+ 
+diff --git a/pnpm-workspace.yaml b/pnpm-workspace.yaml
+index 23253f9..a00c612 100644
+--- a/pnpm-workspace.yaml
++++ b/pnpm-workspace.yaml
+@@ -4,6 +4,7 @@ allowBuilds:
+   esbuild: true
+ overrides:
+   '@pierre/trees>@pierre/theming': 1.0.1
++  source-map-js: 1.2.2
+ minimumReleaseAgeExclude:
+   - '@modelcontextprotocol/client@2.3.1'
+   - '@modelcontextprotocol/core@2.3.1'

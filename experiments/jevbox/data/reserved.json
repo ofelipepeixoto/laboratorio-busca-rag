@@ -1,0 +1,14 @@
+[
+  {"id":"res-01","query":"Qual é o pagamento mensal?","relevant":["b-comercial:1"]},
+  {"id":"res-02","query":"Quando começa a vigência?","relevant":["b-comercial:1"]},
+  {"id":"res-03","query":"revisão editorial publicação","relevant":["c-fontes:1"]},
+  {"id":"res-04","query":"prazo boletim","relevant":["z-boletim:1"]},
+  {"id":"res-05","query":"prazo retenção","relevant":["e-seguranca:2"]},
+  {"id":"res-06","query":"sigilo documentos privados","relevant":["e-seguranca:1"]},
+  {"id":"res-07","query":"Como cancelar o serviço?","relevant":["d-operacao:2"]},
+  {"id":"res-08","query":"antecedência quarenta dias","relevant":[]},
+  {"id":"res-09","query":"horário atendimento","relevant":["d-operacao:1"]},
+  {"id":"res-10","query":"multa moratória","relevant":[]},
+  {"id":"res-11","query":"fonte revogada","relevant":["c-fontes:2"]},
+  {"id":"res-12","query":"publicação automática autorizada","relevant":[]}
+]

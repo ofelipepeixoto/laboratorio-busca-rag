@@ -1,5 +1,10 @@
 # Laboratório de busca documental
 
+O [experimento Jevbox](experiments/jevbox/README.md) integra citações revisadas,
+compara busca plana e hierárquica e verifica três patches isolados. A hierarquia
+perdeu recall no conjunto reservado e permanece experimental; os baselines
+existentes continuam ativos.
+
 Comparação reproduzível entre busca por palavras literais e busca com um pequeno dicionário manual de equivalências, usando somente documentos fictícios. O objetivo é mostrar como medir recuperação antes de escolher uma arquitetura mais complexa.
 
 ## Executar
