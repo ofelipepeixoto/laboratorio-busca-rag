@@ -5,6 +5,10 @@ fica no laboratório existente. Não substitui o RAG documental nem depende do
 experimento Jevbox da [PR #4](https://github.com/ofelipepeixoto/laboratorio-busca-rag/pull/4).
 Nenhum arquivo daquele experimento ou README principal foi alterado.
 
+A segunda camada, com o indexador real, comandos e limitações de isolamento,
+está em [COMPARISON.md](COMPARISON.md). Permanece experimental e dependente
+da revisão do corpus e baseline.
+
 ## Etapa 1: corpus e baseline
 
 ```sh

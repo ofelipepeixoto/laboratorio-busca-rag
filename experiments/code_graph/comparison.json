@@ -1,0 +1,94 @@
+{
+  "corpus_commit": "543107a28342fba6e02242d66a702c8c0f605113",
+  "manifest": {
+    "corpus/billing.py": "ac51dd8aef15d4cb9fcd3fceb8551485f3f5d182d4c3839daa59d398efb1fc28",
+    "corpus/entry.py": "f55057509bd6a251dd7e26ea9cba10f9e0df489d7c942bfa3c98fb0e80ff0b11",
+    "corpus/legacy.py": "a5a0b63383f75e8ad18401739aaf8f0b26167f89b4b4aebaec49bf82a8c42e32",
+    "corpus/orders.py": "e47a121862c706b4ac03e1ac89cf8d843dc67b8316f860ccd04d85b01c0d183a",
+    "corpus/reports.py": "7a1a17ac4c0b8a76d788b24a00cabd14e9cab72d29181746b419775c78b7da07",
+    "corpus/storage.py": "3466dc25c3206851f265548a11dff376a2120a31ad3717a90785c0386f45c179",
+    "tasks.json": "fca4688b1ddb4965db2a52c2dcecde9120b0b5016cdabf5e01102e7952d02058"
+  },
+  "runtime": {
+    "code-graph-rag": "0.1.60",
+    "tree-sitter": "0.26.0",
+    "tree-sitter-python": "0.25.0"
+  },
+  "upstream_sha": "14b47e1d55f8c22395158567a894dbffdeb1e3ae",
+  "lexical": {
+  "totals": {
+    "development": {
+      "exact": 0,
+      "precision_at_3": 0.3333333333333333,
+      "recall_at_3": 0.9,
+      "tasks": 10
+    },
+    "reserved": {
+      "exact": 1,
+      "precision_at_3": 0.4,
+      "recall_at_3": 1.0,
+      "tasks": 10
+    }
+  },
+  "rows": [
+    {"exact": false, "fn": 0, "fp": 2, "hits": [{"file": "legacy.py", "lines": [2, 7, 12]}, {"file": "orders.py", "lines": [1, 6, 11]}, {"file": "billing.py", "lines": [4, 14]}], "id": "d01", "split": "development", "tp": 1},
+    {"exact": false, "fn": 0, "fp": 2, "hits": [{"file": "entry.py", "lines": [1, 6]}, {"file": "legacy.py", "lines": [2]}, {"file": "orders.py", "lines": [5]}], "id": "d02", "split": "development", "tp": 1},
+    {"exact": false, "fn": 0, "fp": 2, "hits": [{"file": "orders.py", "lines": [2, 7]}, {"file": "storage.py", "lines": [1, 10]}, {"file": "legacy.py", "lines": [3]}], "id": "d03", "split": "development", "tp": 1},
+    {"exact": false, "fn": 0, "fp": 1, "hits": [{"file": "legacy.py", "lines": [2, 7, 12]}, {"file": "orders.py", "lines": [1, 6, 11]}, {"file": "billing.py", "lines": [4, 14]}], "id": "d04", "split": "development", "tp": 2},
+    {"exact": false, "fn": 0, "fp": 2, "hits": [{"file": "orders.py", "lines": [2, 7]}, {"file": "storage.py", "lines": [1, 10]}, {"file": "legacy.py", "lines": [3]}], "id": "d05", "split": "development", "tp": 1},
+    {"exact": false, "fn": 0, "fp": 2, "hits": [{"file": "entry.py", "lines": [1, 6]}, {"file": "legacy.py", "lines": [2]}, {"file": "orders.py", "lines": [5]}], "id": "d06", "split": "development", "tp": 1},
+    {"exact": false, "fn": 1, "fp": 2, "hits": [{"file": "billing.py", "lines": [1]}, {"file": "legacy.py", "lines": [4]}, {"file": "orders.py", "lines": [1]}], "id": "d07", "split": "development", "tp": 1},
+    {"exact": false, "fn": 0, "fp": 2, "hits": [{"file": "orders.py", "lines": [1, 14]}, {"file": "billing.py", "lines": [12]}, {"file": "legacy.py", "lines": [2]}], "id": "d08", "split": "development", "tp": 1},
+    {"exact": false, "fn": 0, "fp": 1, "hits": [{"file": "legacy.py", "lines": [16]}], "id": "d09", "split": "development", "tp": 0},
+    {"exact": false, "fn": 0, "fp": 2, "hits": [{"file": "legacy.py", "lines": [4]}, {"file": "reports.py", "lines": [9]}], "id": "d10", "split": "development", "tp": 0},
+    {"exact": false, "fn": 0, "fp": 2, "hits": [{"file": "billing.py", "lines": [8, 14]}, {"file": "reports.py", "lines": [1, 10]}, {"file": "legacy.py", "lines": [2]}], "id": "r01", "split": "reserved", "tp": 1},
+    {"exact": false, "fn": 0, "fp": 2, "hits": [{"file": "reports.py", "lines": [2, 6]}, {"file": "legacy.py", "lines": [3]}, {"file": "storage.py", "lines": [5]}], "id": "r02", "split": "reserved", "tp": 1},
+    {"exact": false, "fn": 0, "fp": 2, "hits": [{"file": "entry.py", "lines": [2, 10]}, {"file": "legacy.py", "lines": [4]}, {"file": "reports.py", "lines": [5]}], "id": "r03", "split": "reserved", "tp": 1},
+    {"exact": false, "fn": 0, "fp": 2, "hits": [{"file": "legacy.py", "lines": [2, 7, 12]}, {"file": "orders.py", "lines": [1, 6, 11]}, {"file": "billing.py", "lines": [4, 14]}], "id": "r04", "split": "reserved", "tp": 1},
+    {"exact": false, "fn": 0, "fp": 1, "hits": [{"file": "billing.py", "lines": [8, 14]}, {"file": "reports.py", "lines": [1, 10]}, {"file": "legacy.py", "lines": [2]}], "id": "r05", "split": "reserved", "tp": 2},
+    {"exact": false, "fn": 0, "fp": 2, "hits": [{"file": "reports.py", "lines": [1, 6]}, {"file": "billing.py", "lines": [17]}, {"file": "legacy.py", "lines": [3]}], "id": "r06", "split": "reserved", "tp": 1},
+    {"exact": false, "fn": 0, "fp": 2, "hits": [{"file": "legacy.py", "lines": [2, 7, 12]}, {"file": "orders.py", "lines": [1, 6, 11]}, {"file": "billing.py", "lines": [4, 14]}], "id": "r07", "split": "reserved", "tp": 1},
+    {"exact": false, "fn": 0, "fp": 1, "hits": [{"file": "legacy.py", "lines": [4]}, {"file": "orders.py", "lines": [2]}, {"file": "reports.py", "lines": [2]}], "id": "r08", "split": "reserved", "tp": 2},
+    {"exact": false, "fn": 0, "fp": 1, "hits": [{"file": "entry.py", "lines": [9]}], "id": "r09", "split": "reserved", "tp": 0},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [], "id": "r10", "split": "reserved", "tp": 0}
+  ]
+},
+  "graph": {
+  "totals": {
+    "development": {
+      "exact": 10,
+      "precision_at_3": 1.0,
+      "recall_at_3": 1.0,
+      "tasks": 10
+    },
+    "reserved": {
+      "exact": 10,
+      "precision_at_3": 1.0,
+      "recall_at_3": 1.0,
+      "tasks": 10
+    }
+  },
+  "rows": [
+    {"exact": true, "fn": 0, "fp": 0, "hits": [{"file": "billing.py", "lines": [4]}], "id": "d01", "split": "development", "tp": 1},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [{"file": "orders.py", "lines": [5]}], "id": "d02", "split": "development", "tp": 1},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [{"file": "storage.py", "lines": [1]}], "id": "d03", "split": "development", "tp": 1},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [{"file": "billing.py", "lines": [13]}, {"file": "orders.py", "lines": [5, 10]}], "id": "d04", "split": "development", "tp": 2},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [{"file": "orders.py", "lines": [5]}], "id": "d05", "split": "development", "tp": 1},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [{"file": "entry.py", "lines": [5]}], "id": "d06", "split": "development", "tp": 1},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [{"file": "orders.py", "lines": [1]}, {"file": "reports.py", "lines": [1]}], "id": "d07", "split": "development", "tp": 2},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [{"file": "billing.py", "lines": [12]}], "id": "d08", "split": "development", "tp": 1},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [], "id": "d09", "split": "development", "tp": 0},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [], "id": "d10", "split": "development", "tp": 0},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [{"file": "billing.py", "lines": [8]}], "id": "r01", "split": "reserved", "tp": 1},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [{"file": "storage.py", "lines": [5]}], "id": "r02", "split": "reserved", "tp": 1},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [{"file": "reports.py", "lines": [5]}], "id": "r03", "split": "reserved", "tp": 1},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [{"file": "legacy.py", "lines": [7]}], "id": "r04", "split": "reserved", "tp": 1},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [{"file": "billing.py", "lines": [13]}, {"file": "reports.py", "lines": [9]}], "id": "r05", "split": "reserved", "tp": 2},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [{"file": "reports.py", "lines": [5]}], "id": "r06", "split": "reserved", "tp": 1},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [{"file": "legacy.py", "lines": [11]}], "id": "r07", "split": "reserved", "tp": 1},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [{"file": "orders.py", "lines": [1]}, {"file": "reports.py", "lines": [1]}], "id": "r08", "split": "reserved", "tp": 2},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [], "id": "r09", "split": "reserved", "tp": 0},
+    {"exact": true, "fn": 0, "fp": 0, "hits": [], "id": "r10", "split": "reserved", "tp": 0}
+  ]
+}
+}
