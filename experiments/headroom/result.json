@@ -1,0 +1,72 @@
+{
+  "decision": "B-STUDY",
+  "upstream_commit": "87e05b68b8aa578f1439abfc8006b38cd09db14d",
+  "headroom_transform_executed": true,
+  "mode": "stdlib-collapse-runs-only",
+  "offset_unit": "python-unicode-characters",
+  "cases": [
+    {
+      "id": "juridico-negacao",
+      "original_sha256": "251d32e7d4c280ed4207be8f74b506c94caf72e31f56c0fb717eed29ca4fd913",
+      "original_bytes": 636,
+      "presented_bytes": 165,
+      "status": "compressed",
+      "roundtrip_exact": true,
+      "original_spans_verified": true
+    },
+    {
+      "id": "eventos-temporais",
+      "original_sha256": "8a21f5ee355d9b849c40310d9231e277e6c0fcd88e61eea391a77f47c221d056",
+      "original_bytes": 108,
+      "presented_bytes": 108,
+      "status": "no_gain_bypass",
+      "roundtrip_exact": true,
+      "original_spans_verified": true
+    },
+    {
+      "id": "linhas-vazias",
+      "original_sha256": "3c0bdf435745805b8696a2b83d89cdda84307cdd64d8002fb1caa282b9d54124",
+      "original_bytes": 88,
+      "presented_bytes": 73,
+      "status": "compressed",
+      "roundtrip_exact": true,
+      "original_spans_verified": true
+    },
+    {
+      "id": "instrucao-como-dado",
+      "original_sha256": "65fd14030c562ae27da5f61b3795dc40ab4a83cd6855300db91d04bb65a37bdf",
+      "original_bytes": 493,
+      "presented_bytes": 154,
+      "status": "compressed",
+      "roundtrip_exact": true,
+      "original_spans_verified": true
+    },
+    {
+      "id": "marcador-literal",
+      "original_sha256": "6cffe331dac6ee8c312577c1148aa5884693c5cae2a6d1c4d53ec4dbda2c2bdb",
+      "original_bytes": 68,
+      "presented_bytes": 68,
+      "status": "literal_marker_bypass",
+      "roundtrip_exact": true,
+      "original_spans_verified": true
+    },
+    {
+      "id": "config-referencia",
+      "original_sha256": "b0a75e3bc23e20801e475f17b50d41017b5045ef2bb7280b0aac8ce8a43077a1",
+      "original_bytes": 75,
+      "presented_bytes": 75,
+      "status": "no_gain_bypass",
+      "roundtrip_exact": true,
+      "original_spans_verified": true
+    }
+  ],
+  "original_bytes": 1468,
+  "presented_bytes": 643,
+  "byte_reduction_fraction": 0.5619891008174387,
+  "integrity_gate_passed": true,
+  "tokens_measured": false,
+  "llm_executed": false,
+  "answer_quality_gate_passed": null,
+  "cost_savings_verified": false,
+  "integration_approved": false
+}

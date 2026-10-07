@@ -1,0 +1,35 @@
+name: Estudo Headroom offline
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  contexto:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Obter somente snapshot auditado
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: headroomlabs-ai/headroom
+          ref: 87e05b68b8aa578f1439abfc8006b38cd09db14d
+          path: upstream-headroom
+          persist-credentials: false
+          sparse-checkout: |
+            headroom/transforms/lossless_compaction.py
+            LICENSE
+            NOTICE
+          sparse-checkout-cone-mode: false
+      - name: Contratos e transformação real sem pacote/provedores
+        env:
+          HEADROOM_STUDY_SOURCE: upstream-headroom
+          HEADROOM_OFFLINE: '1'
+          HEADROOM_BEACON: 'off'
+          DO_NOT_TRACK: '1'
+        run: python3 -m unittest experiments.headroom.test_study -v
+      - name: Reproduzir resultado congelado
+        run: |
+          python3 -m experiments.headroom.study --headroom-source upstream-headroom --output /tmp/headroom-result.json
+          cmp experiments/headroom/result.json /tmp/headroom-result.json

@@ -1,5 +1,9 @@
 # Laboratório de busca documental
 
+Estudo independente proposto: [Headroom offline](experiments/headroom/README.md).
+Compara originais e compactação em fixtures sintéticas; qualidade de respostas,
+economia real e adoção continuam pendentes.
+
 Comparação reproduzível entre busca por palavras literais e busca com um pequeno dicionário manual de equivalências, usando somente documentos fictícios. O objetivo é mostrar como medir recuperação antes de escolher uma arquitetura mais complexa.
 
 ## Executar
