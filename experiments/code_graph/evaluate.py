@@ -51,7 +51,7 @@ def evaluate(retrieve, root=ROOT):
     verify_fixture(root)
     rows = []
     for task in json.loads((root / "tasks.json").read_text()):
-        hits = retrieve(task)
+        hits = retrieve(task, root=root)
         rows.append({"id": task["id"], "split": task["split"],
                      "hits": hits, **grade(task["expected"], hits)})
     totals = {}

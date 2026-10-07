@@ -65,6 +65,19 @@ não é necessariamente a linha exata da chamada. Os limites dos símbolos são
 validados pelo worker, mas a pontuação avalia **arquivos**, não exatidão de spans.
 O índice existe apenas em memória: não é serviço de recuperação persistente.
 
+Na revisão técnica, a cópia descartável foi alterada deliberadamente para
+reproduzir uma lacuna: o runner anterior atribuía o hash da origem mesmo quando
+a cópia diferia. Agora o worker calcula os hashes dos bytes lidos, verifica que
+as fontes permanecem iguais ao final da indexação e o runner exige igualdade
+com o manifesto congelado. Essa verificação detecta divergências da cópia;
+não substitui isolamento contra um processo hostil com o mesmo usuário.
+O teste de reprodução agora compara o relatório inteiro, incluindo versões,
+commit, hashes e baseline, em vez de validar apenas a seção do grafo.
+Corpus, rótulos e pontuações permanecem inalterados. O estudo possui 19 testes,
+incluindo a regressão da PR #5: a busca precisa consultar a mesma pasta de
+fontes selecionada pela avaliação. O callback recebe `root` explicitamente;
+o grafo também valida manifesto e spans contra essa pasta.
+
 Há assimetria explícita: o grafo recebe operação e símbolo qualificado; o
 baseline usa apenas o nome literal. Distratores foram construídos para mostrar
 esse problema, e a reserva reutiliza os mesmos módulos. Logo, o resultado

@@ -1,14 +1,15 @@
 import copy
 import json
 import os
+import shutil
 import subprocess
 import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from compare import UPSTREAM_SHA, build_index, graph_search, validate_index
-from evaluate import ROOT, evaluate
+from compare import UPSTREAM_SHA, build_index, compare, graph_search, validate_index
+from evaluate import ROOT
 
 
 class ComparisonTests(unittest.TestCase):
@@ -19,9 +20,20 @@ class ComparisonTests(unittest.TestCase):
         cls.upstream = Path(os.environ["CODE_GRAPH_UPSTREAM"]).resolve()
         cls.index = build_index(cls.upstream)
 
-    def test_actual_upstream_matches_committed_results(self):
-        actual = evaluate(lambda task: graph_search(self.index, task))
-        self.assertEqual(actual, json.loads((ROOT / "comparison.json").read_text())["graph"])
+    def test_actual_upstream_matches_complete_committed_report(self):
+        actual = compare(self.upstream)
+        self.assertEqual(actual, json.loads((ROOT / "comparison.json").read_text()))
+
+    def test_changed_snapshot_cannot_claim_original_source_hash(self):
+        copytree = shutil.copytree
+        def corrupt_copy(source, destination):
+            result = copytree(source, destination)
+            path = Path(destination) / "billing.py"
+            path.write_text(path.read_text().replace("def total(items):", "def changed_total(items):"))
+            return result
+        with patch("compare.shutil.copytree", side_effect=corrupt_copy):
+            with self.assertRaisesRegex(ValueError, "SOURCE_HASH_MISMATCH"):
+                build_index(self.upstream)
 
     def test_same_name_is_not_same_symbol(self):
         task = {"operation": "callers", "symbol": "legacy.total"}

@@ -36,13 +36,17 @@ def build_index(upstream):
         if result.returncode or len(result.stdout) > 2 * 1024**2:
             raise ValueError("INDEX_BUILD_FAILED")
         index = json.loads(result.stdout)
+        expected_hashes = {name.removeprefix("corpus/"): value
+                           for name, value in manifest.items() if name.startswith("corpus/")}
+        if index.get("source_hashes") != expected_hashes:
+            raise ValueError("SOURCE_HASH_MISMATCH")
     index.update(upstream_sha=UPSTREAM_SHA, manifest=manifest)
     validate_index(index)
     return index
 
 
-def validate_index(index):
-    if index["upstream_sha"] != UPSTREAM_SHA or index["manifest"] != verify_fixture():
+def validate_index(index, root=ROOT):
+    if index["upstream_sha"] != UPSTREAM_SHA or index["manifest"] != verify_fixture(root):
         raise ValueError("STALE_INDEX")
     files = {name.removeprefix("corpus/") for name in index["manifest"] if name.startswith("corpus/")}
     if {n["file"] for n in index["nodes"].values() if n["kind"] == "Module"} != files:
@@ -50,13 +54,13 @@ def validate_index(index):
     for node in index["nodes"].values():
         if node["file"] not in files:
             raise ValueError("OUT_OF_SCOPE_EVIDENCE")
-        lines = (ROOT / "corpus" / node["file"]).read_text().splitlines()
+        lines = (root / "corpus" / node["file"]).read_text().splitlines()
         if not (1 <= node["start"] <= node["end"] <= len(lines)):
             raise ValueError("INVALID_EVIDENCE_SPAN")
 
 
-def graph_search(index, task):
-    validate_index(index)
+def graph_search(index, task, root=ROOT):
+    validate_index(index, root)
     target = "radar_fixture." + task["symbol"]
     nodes = index["nodes"]
     if task["operation"] == "definition":
@@ -81,7 +85,7 @@ def compare(upstream):
     return {"upstream_sha": UPSTREAM_SHA, "corpus_commit": CORPUS_COMMIT,
             "manifest": index["manifest"], "runtime": index["runtime"],
             "lexical": evaluate(lexical),
-            "graph": evaluate(lambda task: graph_search(index, task))}
+            "graph": evaluate(lambda task, root: graph_search(index, task, root))}
 
 
 if __name__ == "__main__":

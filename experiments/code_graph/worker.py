@@ -1,5 +1,6 @@
 """Trusted, pinned parser over the frozen synthetic corpus ONLY. Not a sandbox."""
 import contextlib
+import hashlib
 import json
 import logging
 import importlib.metadata
@@ -35,6 +36,8 @@ def main():
         GraphUpdater(ingestor, corpus, {"python": parser},
                      {"python": queries["python"]}, project_name="radar_fixture",
                      skip_embeddings=True, state_dir=corpus.parent / "state").run(force=True)
+    if {p.name: p.read_bytes() for p in corpus.glob("*.py")} != sources:
+        raise ValueError("SOURCE_CHANGED_DURING_INDEXING")
     nodes = {}
     for (kind, uid), props in ingestor.nodes.items():
         name = props.get("path")
@@ -51,7 +54,9 @@ def main():
                     if rel in {"CALLS", "IMPORTS"}})
     runtime = {name: importlib.metadata.version(name)
                for name in ("tree-sitter", "tree-sitter-python", "code-graph-rag")}
-    print(json.dumps({"nodes": nodes, "edges": edges, "runtime": runtime}, sort_keys=True))
+    source_hashes = {name: hashlib.sha256(data).hexdigest() for name, data in sources.items()}
+    print(json.dumps({"nodes": nodes, "edges": edges, "runtime": runtime,
+                      "source_hashes": source_hashes}, sort_keys=True))
 
 
 if __name__ == "__main__":
