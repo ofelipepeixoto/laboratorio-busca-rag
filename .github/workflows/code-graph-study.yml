@@ -11,3 +11,23 @@ jobs:
         with:
           persist-credentials: false
       - run: python3 -m unittest discover -s experiments/code_graph -p 'test_baseline.py' -v
+  graph:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          repository: vitali87/code-graph-rag
+          ref: 14b47e1d55f8c22395158567a894dbffdeb1e3ae
+          path: .code-graph-upstream
+          persist-credentials: false
+      - name: Install pinned upstream dependencies
+        run: |
+          python3 -m venv .study-tools
+          .study-tools/bin/pip install uv==0.12.19
+          .study-tools/bin/uv sync --project .code-graph-upstream --frozen --no-dev --python 3.12
+      - name: Compare the real indexer against the frozen corpus
+        run: CODE_GRAPH_UPSTREAM="$PWD/.code-graph-upstream" python3 -m unittest discover -s experiments/code_graph -p 'test_*.py' -v
