@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from evaluate import ROOT, evaluate, grade, lexical, verify_fixture
+from evaluate import ROOT, digest, evaluate, grade, lexical, verify_fixture
 
 
 class BaselineTests(unittest.TestCase):
@@ -29,6 +29,21 @@ class BaselineTests(unittest.TestCase):
 
     def test_committed_results_reproduce(self):
         self.assertEqual(evaluate(lexical), json.loads((ROOT / "baseline.json").read_text()))
+
+    def test_alternate_fixture_is_also_the_retrieval_source(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "corpus").mkdir()
+            (root / "corpus" / "alternate.py").write_text("alternate_only = 1\n")
+            task = {"id": "probe", "split": "development", "term": "alternate_only",
+                    "expected": ["alternate.py"]}
+            (root / "tasks.json").write_text(json.dumps([task]))
+            manifest = {name: digest((root / name).read_bytes())
+                        for name in ("tasks.json", "corpus/alternate.py")}
+            (root / "manifest.json").write_text(json.dumps(manifest))
+            result = evaluate(lexical, root=root)
+            self.assertEqual(result["rows"][0]["hits"], [{"file": "alternate.py", "lines": [1]}])
+            self.assertTrue(result["rows"][0]["exact"])
 
     def test_fixture_tampering_additions_and_symlinks_are_rejected(self):
         for mode in ("modify", "add", "symlink"):
