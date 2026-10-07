@@ -1,0 +1,411 @@
+{
+  "schema": 1,
+  "decision": "B — STUDY",
+  "synthetic_only": true,
+  "mineru_upstream_commit": "ed50cc15bc2c9bfb00520dadfe61979866e62236",
+  "patch_sha256": [
+    "3be0e1256f10adc2a5cc2c01df4bbabbeb2a06f9d5fcdf36dc3bac27a1b267ec  0001-telemetry-explicit-consent.patch",
+    "cf6bb6390781514d444f0c178406d0c2edd3878a5a4bfc0308eff8363fa0105f  0002-bound-upload-stream.patch",
+    "00418fc914276c36a6c7bd08657075bf7cfdbcdb21158a8a720a5aca60c86a57  0003-reject-blank-api-key.patch"
+  ],
+  "manifest_sha256": "f20828edac7c56e6a37c129a6c06083533762794a4f3b670bb6e4797e6b06eb3",
+  "engines_requested": [
+    "pypdf",
+    "mineru-flash"
+  ],
+  "execution_complete": true,
+  "quality_gate_passed": false,
+  "integration_approved": false,
+  "paid_calls": 0,
+  "results": [
+    {
+      "id": "contrato",
+      "split": "development",
+      "kind": "digital",
+      "engine": "pypdf",
+      "source_sha256": "ea7b8707aa2057431df50e34676367c996312d263bc04bcd1ab05777c67f6849",
+      "versions": {
+        "pypdf": "6.19.0"
+      },
+      "review_state": "pending",
+      "parse_seconds": 0.0012441700000636047,
+      "worker_seconds": 0.4164621480003916,
+      "page_text_hashes": [
+        "6dff6f33dba18f16297f096e2b2f20b68f5be7a13fb0b81ed7f28b93c07f1160",
+        "ef2d32b8e59572d1cb12c613b5a37248d7c2e1ef94de4c13a184de5e917f5836"
+      ],
+      "metrics": {
+        "critical_found": 4,
+        "critical_total": 4,
+        "critical_recall": 1.0,
+        "empty_pages": 0,
+        "needs_review_or_ocr": false,
+        "critical_by_page": [
+          {
+            "page": 1,
+            "found": true
+          },
+          {
+            "page": 1,
+            "found": true
+          },
+          {
+            "page": 2,
+            "found": true
+          },
+          {
+            "page": 2,
+            "found": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "contrato",
+      "split": "development",
+      "kind": "digital",
+      "engine": "mineru-flash",
+      "source_sha256": "ea7b8707aa2057431df50e34676367c996312d263bc04bcd1ab05777c67f6849",
+      "versions": {
+        "pypdf": "6.19.0",
+        "mineru": "4.0.10",
+        "docvortex": "0.5.11",
+        "pypdfium2": "5.14.0"
+      },
+      "review_state": "pending",
+      "parse_seconds": 2.328586349000034,
+      "worker_seconds": 3.022979110999586,
+      "page_text_hashes": [
+        "806f6e48480401b1a6cb79003fd3d1a5ec636df1b8a34bedaa98cc64c37b1d55",
+        "de187f09f3f738c7a20d4180f093acd355ae1dcee1199936972044aaabb82afe"
+      ],
+      "metrics": {
+        "critical_found": 4,
+        "critical_total": 4,
+        "critical_recall": 1.0,
+        "empty_pages": 0,
+        "needs_review_or_ocr": false,
+        "critical_by_page": [
+          {
+            "page": 1,
+            "found": true
+          },
+          {
+            "page": 1,
+            "found": true
+          },
+          {
+            "page": 2,
+            "found": true
+          },
+          {
+            "page": 2,
+            "found": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "tabela",
+      "split": "development",
+      "kind": "digital",
+      "engine": "pypdf",
+      "source_sha256": "7def6f433cd55c4fdcba191a31fd5feabb30662a26a405e0cae35adaca1c7c9b",
+      "versions": {
+        "pypdf": "6.19.0"
+      },
+      "review_state": "pending",
+      "parse_seconds": 0.0007594170001539169,
+      "worker_seconds": 0.4152188030002435,
+      "page_text_hashes": [
+        "ed4756368e127d8ce54d148d4578d428aea931c0f2074da290aa1c5bdc6dd4c3"
+      ],
+      "metrics": {
+        "critical_found": 3,
+        "critical_total": 3,
+        "critical_recall": 1.0,
+        "empty_pages": 0,
+        "needs_review_or_ocr": false,
+        "critical_by_page": [
+          {
+            "page": 1,
+            "found": true
+          },
+          {
+            "page": 1,
+            "found": true
+          },
+          {
+            "page": 1,
+            "found": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "tabela",
+      "split": "development",
+      "kind": "digital",
+      "engine": "mineru-flash",
+      "source_sha256": "7def6f433cd55c4fdcba191a31fd5feabb30662a26a405e0cae35adaca1c7c9b",
+      "versions": {
+        "pypdf": "6.19.0",
+        "mineru": "4.0.10",
+        "docvortex": "0.5.11",
+        "pypdfium2": "5.14.0"
+      },
+      "review_state": "pending",
+      "parse_seconds": 3.0545849620002627,
+      "worker_seconds": 3.8242690349998156,
+      "page_text_hashes": [
+        "eb4784d5b080ff15176931ccfc9e9e051dc01c496c20a79234e88817bab6f2a6"
+      ],
+      "metrics": {
+        "critical_found": 2,
+        "critical_total": 3,
+        "critical_recall": 0.6666666666666666,
+        "empty_pages": 0,
+        "needs_review_or_ocr": false,
+        "critical_by_page": [
+          {
+            "page": 1,
+            "found": true
+          },
+          {
+            "page": 1,
+            "found": false
+          },
+          {
+            "page": 1,
+            "found": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "reserva",
+      "split": "holdout",
+      "kind": "digital",
+      "engine": "pypdf",
+      "source_sha256": "80151e9cf09f1a4b0a3f2f0a6810232507b02829a75fa9ba31474be5bd33b135",
+      "versions": {
+        "pypdf": "6.19.0"
+      },
+      "review_state": "pending",
+      "parse_seconds": 0.001209748999826843,
+      "worker_seconds": 0.41531506899991655,
+      "page_text_hashes": [
+        "af4a4f534b77bc37e53c7c7d48813203f7c6a4a91a47408969a53537e1b20daf",
+        "b7669df15ec333bb8e10f75cc0429fce642acadc7ca19027ac63de5970cc6d70"
+      ],
+      "metrics": {
+        "critical_found": 5,
+        "critical_total": 5,
+        "critical_recall": 1.0,
+        "empty_pages": 0,
+        "needs_review_or_ocr": false,
+        "critical_by_page": [
+          {
+            "page": 1,
+            "found": true
+          },
+          {
+            "page": 1,
+            "found": true
+          },
+          {
+            "page": 1,
+            "found": true
+          },
+          {
+            "page": 2,
+            "found": true
+          },
+          {
+            "page": 2,
+            "found": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "reserva",
+      "split": "holdout",
+      "kind": "digital",
+      "engine": "mineru-flash",
+      "source_sha256": "80151e9cf09f1a4b0a3f2f0a6810232507b02829a75fa9ba31474be5bd33b135",
+      "versions": {
+        "pypdf": "6.19.0",
+        "mineru": "4.0.10",
+        "docvortex": "0.5.11",
+        "pypdfium2": "5.14.0"
+      },
+      "review_state": "pending",
+      "parse_seconds": 2.3201209949993427,
+      "worker_seconds": 3.0221526039995297,
+      "page_text_hashes": [
+        "eaebfc8d0e08e08a8d688af117304580046dfb1695b0b1930fd7b384ab0df266",
+        "8696580e7e5569402d7dc723eaed5ede367ea106702a929e117c67fd3597f7a7"
+      ],
+      "metrics": {
+        "critical_found": 5,
+        "critical_total": 5,
+        "critical_recall": 1.0,
+        "empty_pages": 0,
+        "needs_review_or_ocr": false,
+        "critical_by_page": [
+          {
+            "page": 1,
+            "found": true
+          },
+          {
+            "page": 1,
+            "found": true
+          },
+          {
+            "page": 1,
+            "found": true
+          },
+          {
+            "page": 2,
+            "found": true
+          },
+          {
+            "page": 2,
+            "found": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "instrucao_como_dado",
+      "split": "holdout",
+      "kind": "digital",
+      "engine": "pypdf",
+      "source_sha256": "6745ea448eb268770fb5a68b29f5eca7104d8ebc927198ffa1ccaec1ed9d4157",
+      "versions": {
+        "pypdf": "6.19.0"
+      },
+      "review_state": "pending",
+      "parse_seconds": 0.0007033649999357294,
+      "worker_seconds": 0.36514163199990435,
+      "page_text_hashes": [
+        "3d5e573fee81ac6bb1b36f51e0bcdfdc6cd24e4c30f2201d3abe090e2fcb073c"
+      ],
+      "metrics": {
+        "critical_found": 1,
+        "critical_total": 1,
+        "critical_recall": 1.0,
+        "empty_pages": 0,
+        "needs_review_or_ocr": false,
+        "critical_by_page": [
+          {
+            "page": 1,
+            "found": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "instrucao_como_dado",
+      "split": "holdout",
+      "kind": "digital",
+      "engine": "mineru-flash",
+      "source_sha256": "6745ea448eb268770fb5a68b29f5eca7104d8ebc927198ffa1ccaec1ed9d4157",
+      "versions": {
+        "pypdf": "6.19.0",
+        "mineru": "4.0.10",
+        "docvortex": "0.5.11",
+        "pypdfium2": "5.14.0"
+      },
+      "review_state": "pending",
+      "parse_seconds": 2.456663703000231,
+      "worker_seconds": 3.223658402000183,
+      "page_text_hashes": [
+        "b5f1faed080a07ee8cfe5859c82a95de729900f9d7e0f34bc9e2a2294105ebf0"
+      ],
+      "metrics": {
+        "critical_found": 1,
+        "critical_total": 1,
+        "critical_recall": 1.0,
+        "empty_pages": 0,
+        "needs_review_or_ocr": false,
+        "critical_by_page": [
+          {
+            "page": 1,
+            "found": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "scan",
+      "split": "development",
+      "kind": "image_only",
+      "engine": "pypdf",
+      "source_sha256": "3b3d183d7d034e68765f00495106038967eff9157b2cab6a5263ebdd4f710ca1",
+      "versions": {
+        "pypdf": "6.19.0"
+      },
+      "review_state": "pending",
+      "parse_seconds": 0.0003746110005522496,
+      "worker_seconds": 0.3648532980005257,
+      "page_text_hashes": [
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      ],
+      "metrics": {
+        "critical_found": 0,
+        "critical_total": 1,
+        "critical_recall": 0.0,
+        "empty_pages": 1,
+        "needs_review_or_ocr": true,
+        "critical_by_page": [
+          {
+            "page": 1,
+            "found": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "scan",
+      "split": "development",
+      "kind": "image_only",
+      "engine": "mineru-flash",
+      "source_sha256": "3b3d183d7d034e68765f00495106038967eff9157b2cab6a5263ebdd4f710ca1",
+      "versions": {
+        "pypdf": "6.19.0",
+        "mineru": "4.0.10",
+        "docvortex": "0.5.11",
+        "pypdfium2": "5.14.0"
+      },
+      "review_state": "pending",
+      "parse_seconds": 2.993441241000255,
+      "worker_seconds": 3.9295219940004245,
+      "page_text_hashes": [
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      ],
+      "metrics": {
+        "critical_found": 0,
+        "critical_total": 1,
+        "critical_recall": 0.0,
+        "empty_pages": 1,
+        "needs_review_or_ocr": true,
+        "critical_by_page": [
+          {
+            "page": 1,
+            "found": false
+          }
+        ]
+      }
+    }
+  ],
+  "failures": [],
+  "limits": [
+    "Seven synthetic PDF pages; not a representative benchmark",
+    "Flash/txt only; no OCR, weights, GPU, LLM or retrieval evaluation",
+    "One cold worker per case; no p95, throughput or isolated RSS measurement",
+    "No filesystem sandbox: only frozen synthetic fixtures are allowed",
+    "Text hashes and page positions are not Evidence Kit approval"
+  ]
+}

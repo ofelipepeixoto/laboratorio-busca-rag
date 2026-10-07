@@ -106,3 +106,11 @@ A inicialização agora espera TCP em `127.0.0.1` e usa o mesmo host no psql.
 O servidor temporário de initdb pode aceitar socket Unix antes do restart final;
 essa condição foi observada na primeira CI composta. A regressão de protocolo
 reproduz a falha anterior sob simulação e conserva o teste real como gate.
+
+## Estudo MinerU opcional
+
+[Experimento de parsing PT-BR](experiments/mineru/README.md) com cinco PDFs
+fictícios, processos restritos e comparação MinerU Flash/pypdf. Os baselines
+acima continuam independentes dessa instalação. Nos seis exemplos de páginas
+digitais, pypdf recuperou 13/13 campos críticos e MinerU 12/13; ambos precisam
+de OCR para o scan sem texto. Decisão **B — STUDY**, sem integração aprovada.
