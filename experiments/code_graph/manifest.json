@@ -1,0 +1,9 @@
+{
+  "tasks.json": "fca4688b1ddb4965db2a52c2dcecde9120b0b5016cdabf5e01102e7952d02058",
+  "corpus/billing.py": "ac51dd8aef15d4cb9fcd3fceb8551485f3f5d182d4c3839daa59d398efb1fc28",
+  "corpus/entry.py": "f55057509bd6a251dd7e26ea9cba10f9e0df489d7c942bfa3c98fb0e80ff0b11",
+  "corpus/legacy.py": "a5a0b63383f75e8ad18401739aaf8f0b26167f89b4b4aebaec49bf82a8c42e32",
+  "corpus/orders.py": "e47a121862c706b4ac03e1ac89cf8d843dc67b8316f860ccd04d85b01c0d183a",
+  "corpus/reports.py": "7a1a17ac4c0b8a76d788b24a00cabd14e9cab72d29181746b419775c78b7da07",
+  "corpus/storage.py": "3466dc25c3206851f265548a11dff376a2120a31ad3717a90785c0386f45c179"
+}

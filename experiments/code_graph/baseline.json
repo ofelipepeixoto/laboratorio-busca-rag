@@ -1,0 +1,38 @@
+{
+  "totals": {
+    "development": {
+      "tasks": 10,
+      "exact": 0,
+      "precision_at_3": 0.3333333333333333,
+      "recall_at_3": 0.9
+    },
+    "reserved": {
+      "tasks": 10,
+      "exact": 1,
+      "precision_at_3": 0.4,
+      "recall_at_3": 1.0
+    }
+  },
+  "rows": [
+    {"id": "d01", "split": "development", "hits": [{"file": "legacy.py", "lines": [2, 7, 12]}, {"file": "orders.py", "lines": [1, 6, 11]}, {"file": "billing.py", "lines": [4, 14]}], "tp": 1, "fp": 2, "fn": 0, "exact": false},
+    {"id": "d02", "split": "development", "hits": [{"file": "entry.py", "lines": [1, 6]}, {"file": "legacy.py", "lines": [2]}, {"file": "orders.py", "lines": [5]}], "tp": 1, "fp": 2, "fn": 0, "exact": false},
+    {"id": "d03", "split": "development", "hits": [{"file": "orders.py", "lines": [2, 7]}, {"file": "storage.py", "lines": [1, 10]}, {"file": "legacy.py", "lines": [3]}], "tp": 1, "fp": 2, "fn": 0, "exact": false},
+    {"id": "d04", "split": "development", "hits": [{"file": "legacy.py", "lines": [2, 7, 12]}, {"file": "orders.py", "lines": [1, 6, 11]}, {"file": "billing.py", "lines": [4, 14]}], "tp": 2, "fp": 1, "fn": 0, "exact": false},
+    {"id": "d05", "split": "development", "hits": [{"file": "orders.py", "lines": [2, 7]}, {"file": "storage.py", "lines": [1, 10]}, {"file": "legacy.py", "lines": [3]}], "tp": 1, "fp": 2, "fn": 0, "exact": false},
+    {"id": "d06", "split": "development", "hits": [{"file": "entry.py", "lines": [1, 6]}, {"file": "legacy.py", "lines": [2]}, {"file": "orders.py", "lines": [5]}], "tp": 1, "fp": 2, "fn": 0, "exact": false},
+    {"id": "d07", "split": "development", "hits": [{"file": "billing.py", "lines": [1]}, {"file": "legacy.py", "lines": [4]}, {"file": "orders.py", "lines": [1]}], "tp": 1, "fp": 2, "fn": 1, "exact": false},
+    {"id": "d08", "split": "development", "hits": [{"file": "orders.py", "lines": [1, 14]}, {"file": "billing.py", "lines": [12]}, {"file": "legacy.py", "lines": [2]}], "tp": 1, "fp": 2, "fn": 0, "exact": false},
+    {"id": "d09", "split": "development", "hits": [{"file": "legacy.py", "lines": [16]}], "tp": 0, "fp": 1, "fn": 0, "exact": false},
+    {"id": "d10", "split": "development", "hits": [{"file": "legacy.py", "lines": [4]}, {"file": "reports.py", "lines": [9]}], "tp": 0, "fp": 2, "fn": 0, "exact": false},
+    {"id": "r01", "split": "reserved", "hits": [{"file": "billing.py", "lines": [8, 14]}, {"file": "reports.py", "lines": [1, 10]}, {"file": "legacy.py", "lines": [2]}], "tp": 1, "fp": 2, "fn": 0, "exact": false},
+    {"id": "r02", "split": "reserved", "hits": [{"file": "reports.py", "lines": [2, 6]}, {"file": "legacy.py", "lines": [3]}, {"file": "storage.py", "lines": [5]}], "tp": 1, "fp": 2, "fn": 0, "exact": false},
+    {"id": "r03", "split": "reserved", "hits": [{"file": "entry.py", "lines": [2, 10]}, {"file": "legacy.py", "lines": [4]}, {"file": "reports.py", "lines": [5]}], "tp": 1, "fp": 2, "fn": 0, "exact": false},
+    {"id": "r04", "split": "reserved", "hits": [{"file": "legacy.py", "lines": [2, 7, 12]}, {"file": "orders.py", "lines": [1, 6, 11]}, {"file": "billing.py", "lines": [4, 14]}], "tp": 1, "fp": 2, "fn": 0, "exact": false},
+    {"id": "r05", "split": "reserved", "hits": [{"file": "billing.py", "lines": [8, 14]}, {"file": "reports.py", "lines": [1, 10]}, {"file": "legacy.py", "lines": [2]}], "tp": 2, "fp": 1, "fn": 0, "exact": false},
+    {"id": "r06", "split": "reserved", "hits": [{"file": "reports.py", "lines": [1, 6]}, {"file": "billing.py", "lines": [17]}, {"file": "legacy.py", "lines": [3]}], "tp": 1, "fp": 2, "fn": 0, "exact": false},
+    {"id": "r07", "split": "reserved", "hits": [{"file": "legacy.py", "lines": [2, 7, 12]}, {"file": "orders.py", "lines": [1, 6, 11]}, {"file": "billing.py", "lines": [4, 14]}], "tp": 1, "fp": 2, "fn": 0, "exact": false},
+    {"id": "r08", "split": "reserved", "hits": [{"file": "legacy.py", "lines": [4]}, {"file": "orders.py", "lines": [2]}, {"file": "reports.py", "lines": [2]}], "tp": 2, "fp": 1, "fn": 0, "exact": false},
+    {"id": "r09", "split": "reserved", "hits": [{"file": "entry.py", "lines": [9]}], "tp": 0, "fp": 1, "fn": 0, "exact": false},
+    {"id": "r10", "split": "reserved", "hits": [], "tp": 0, "fp": 0, "fn": 0, "exact": true}
+  ]
+}
