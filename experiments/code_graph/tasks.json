@@ -1,0 +1,22 @@
+[
+  {"id":"d01","split":"development","operation":"definition","symbol":"billing.total","term":"total","expected":["billing.py"]},
+  {"id":"d02","split":"development","operation":"definition","symbol":"orders.checkout","term":"checkout","expected":["orders.py"]},
+  {"id":"d03","split":"development","operation":"definition","symbol":"storage.save","term":"save","expected":["storage.py"]},
+  {"id":"d04","split":"development","operation":"callers","symbol":"billing.total","term":"total","expected":["billing.py","orders.py"]},
+  {"id":"d05","split":"development","operation":"callers","symbol":"storage.save","term":"save","expected":["orders.py"]},
+  {"id":"d06","split":"development","operation":"callers","symbol":"orders.checkout","term":"checkout","expected":["entry.py"]},
+  {"id":"d07","split":"development","operation":"importers","symbol":"billing","term":"billing","expected":["orders.py","reports.py"]},
+  {"id":"d08","split":"development","operation":"definition","symbol":"billing.Invoice","term":"Invoice","expected":["billing.py"]},
+  {"id":"d09","split":"development","operation":"definition","symbol":"ghost","term":"ghost","expected":[]},
+  {"id":"d10","split":"development","operation":"callers","symbol":"reports.promotion","term":"promotion","expected":[]},
+  {"id":"r01","split":"reserved","operation":"definition","symbol":"billing.discount","term":"discount","expected":["billing.py"]},
+  {"id":"r02","split":"reserved","operation":"definition","symbol":"storage.load","term":"load","expected":["storage.py"]},
+  {"id":"r03","split":"reserved","operation":"definition","symbol":"reports.render","term":"render","expected":["reports.py"]},
+  {"id":"r04","split":"reserved","operation":"definition","symbol":"legacy.total","term":"total","expected":["legacy.py"]},
+  {"id":"r05","split":"reserved","operation":"callers","symbol":"billing.discount","term":"discount","expected":["billing.py","reports.py"]},
+  {"id":"r06","split":"reserved","operation":"callers","symbol":"billing.format_receipt","term":"format_receipt","expected":["reports.py"]},
+  {"id":"r07","split":"reserved","operation":"callers","symbol":"legacy.total","term":"total","expected":["legacy.py"]},
+  {"id":"r08","split":"reserved","operation":"importers","symbol":"storage","term":"storage","expected":["orders.py","reports.py"]},
+  {"id":"r09","split":"reserved","operation":"callers","symbol":"entry.preview","term":"preview","expected":[]},
+  {"id":"r10","split":"reserved","operation":"definition","symbol":"missing","term":"missing","expected":[]}
+]
