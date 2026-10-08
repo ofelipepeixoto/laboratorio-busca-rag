@@ -24,11 +24,14 @@ def add_package_paths():
     if not sys.flags.no_site or not sys.flags.ignore_environment:
         raise RuntimeError("startup_flags_required")
     prefix = Path(sys.executable).absolute().parent.parent
-    if not (prefix / "pyvenv.cfg").is_file():
+    virtual = (prefix / "pyvenv.cfg").is_file()
+    if not virtual:
         prefix = Path(sys.base_prefix)
     variables = {"base": str(prefix), "platbase": str(prefix)}
+    # Ubuntu's base scheme may use dist-packages/local even inside a -S venv.
+    scheme = "venv" if virtual else sysconfig.get_default_scheme()
     for name in ("purelib", "platlib"):
-        path = sysconfig.get_path(name, vars=variables)
+        path = sysconfig.get_path(name, scheme=scheme, vars=variables)
         if path not in sys.path:
             sys.path.append(path)
 
