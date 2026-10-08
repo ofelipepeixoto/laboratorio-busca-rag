@@ -16,7 +16,7 @@ class Worker(unittest.TestCase):
             root = Path(temp)
             path = root / "fixture.pdf"
             path.write_bytes(data)
-            result = subprocess.run([sys.executable, "-E", "-s", "-B", str(ROOT / "worker.py"), engine, str(path)],
+            result = subprocess.run([sys.executable, "-E", "-S", "-B", str(ROOT / "worker.py"), engine, str(path)],
                                     cwd=root, env=child_environment(root), capture_output=True,
                                     timeout=30, check=False)
             self.assertNotEqual(result.returncode, 0)

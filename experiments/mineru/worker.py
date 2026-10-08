@@ -5,12 +5,32 @@ import importlib.util
 import json
 from pathlib import Path
 import sys
+import sysconfig
 import time
 
 from isolation import MAX_INPUT, MAX_PAGES, MAX_PAGE_TEXT, restrict_worker
 
 VERSIONS = {"pypdf": "6.19.0", "mineru": "4.0.10", "docvortex": "0.5.11",
             "pypdfium2": "5.14.0"}
+
+
+def add_package_paths():
+    """After restrictions, expose installed packages without executing site or .pth.
+
+    Python 3.12 -S does not set the venv prefix. Preserve the executable's
+    lexical path (venv Python is commonly a symlink to the base interpreter).
+    Editable installs requiring .pth hooks are deliberately unsupported.
+    """
+    if not sys.flags.no_site or not sys.flags.ignore_environment:
+        raise RuntimeError("startup_flags_required")
+    prefix = Path(sys.executable).absolute().parent.parent
+    if not (prefix / "pyvenv.cfg").is_file():
+        prefix = Path(sys.base_prefix)
+    variables = {"base": str(prefix), "platbase": str(prefix)}
+    for name in ("purelib", "platlib"):
+        path = sysconfig.get_path(name, vars=variables)
+        if path not in sys.path:
+            sys.path.append(path)
 
 
 def verify_mineru_sources():
@@ -75,6 +95,7 @@ def extract(engine, path):
 def main():
     try:
         restrict_worker()
+        add_package_paths()
         # Imports de terceiros ocorrem só depois da instalação dos limites.
         result = extract(sys.argv[1], Path(sys.argv[2]))
     except Exception as error:

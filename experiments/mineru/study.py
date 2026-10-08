@@ -121,7 +121,7 @@ def run_case(case, engine, python):
         path = directory / "input.pdf"
         path.write_bytes(data)
         start = time.monotonic()
-        raw = bounded_process([python, "-E", "-s", "-B", str(ROOT / "worker.py"), engine, str(path)], directory)
+        raw = bounded_process([python, "-E", "-S", "-B", str(ROOT / "worker.py"), engine, str(path)], directory)
         wall = time.monotonic() - start
     result = validate_result(json.loads(raw), engine, case["sha256"], len(case["pages"]))
     return {"id": case["id"], "split": case["split"], "kind": case["kind"],

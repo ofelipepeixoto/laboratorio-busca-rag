@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 import sys
 import tempfile
+import subprocess
 import unittest
 from unittest.mock import patch
 
@@ -119,7 +120,42 @@ class Isolation(unittest.TestCase):
     def invoke(self, code, timeout=5):
         prefix = f"import sys; sys.path.insert(0, {str(study.ROOT)!r}); from isolation import restrict_worker; restrict_worker(); "
         with tempfile.TemporaryDirectory() as temp:
-            return study.bounded_process([sys.executable, "-E", "-s", "-B", "-c", prefix + code], Path(temp), timeout)
+            return study.bounded_process([sys.executable, "-E", "-S", "-B", "-c", prefix + code], Path(temp), timeout)
+
+    def test_startup_hooks_skipped_and_packages_import_after_restrictions(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            venv = root / 'venv'
+            subprocess.run([sys.executable, '-m', 'venv', '--without-pip', str(venv)],
+                           check=True, timeout=20, capture_output=True)
+            python = str(venv / 'bin/python')
+            packages = venv / f'lib/python{sys.version_info.major}.{sys.version_info.minor}/site-packages'
+            marker = root / 'startup-marker'
+            hook = f"from pathlib import Path; Path({str(marker)!r}).touch()"
+            (packages / 'sitecustomize.py').write_text(hook)
+            (packages / 'startup.pth').write_text('import pathlib; pathlib.Path(' + repr(str(marker)) + ').touch()\n')
+            # Positive control: old flags execute the harmless hooks.
+            subprocess.run([python, '-E', '-s', '-B', '-c', 'pass'], check=True,
+                           env=study.child_environment(root), timeout=5)
+            self.assertTrue(marker.exists())
+            marker.unlink()
+            (packages / 'fixture_package.py').write_text(
+                "import resource, socket\n"
+                "assert resource.getrlimit(resource.RLIMIT_CORE) == (0, 0)\n"
+                "try: socket.socket(socket.AF_INET)\n"
+                "except PermissionError: pass\n"
+                "else: raise AssertionError('package imported before isolation')\n")
+            code = (f'import sys; sys.path.insert(0, {str(study.ROOT)!r}); '
+                    'from isolation import restrict_worker; restrict_worker(); '
+                    'from worker import add_package_paths; add_package_paths(); '
+                    'import fixture_package; print("restricted")')
+            self.assertEqual(study.bounded_process([python, '-E', '-S', '-B', '-c', code], root).strip(), b'restricted')
+            self.assertFalse(marker.exists())
+            # Exercise the production run_case command too; fake venv lacks parsers.
+            case = json.loads((study.ROOT / 'manifest.json').read_text())['cases'][0]
+            with self.assertRaisesRegex(ValueError, 'worker_failed'):
+                study.run_case(case, 'pypdf', python)
+            self.assertFalse(marker.exists())
 
     def test_kernel_blocks_native_ipv4_ipv6_and_unix_connect(self):
         code = '''

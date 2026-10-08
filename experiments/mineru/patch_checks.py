@@ -18,7 +18,8 @@ import sys
 sys.path.insert(0, sys.argv[1])
 from isolation import restrict_worker
 restrict_worker()
-from worker import verify_mineru_sources
+from worker import add_package_paths, verify_mineru_sources
+add_package_paths()
 verify_mineru_sources()
 import pytest
 raise SystemExit(pytest.main(['-q', '-o', 'addopts=', '-p', 'no:cacheprovider', *sys.argv[2:]]))
@@ -27,7 +28,7 @@ raise SystemExit(pytest.main(['-q', '-o', 'addopts=', '-p', 'no:cacheprovider', 
              args.upstream.absolute() / "tests/unittest/test_parser_api_contract.py",
              args.upstream.absolute() / "tests/unittest/test_doclib_telemetry_core.py"]
     with tempfile.TemporaryDirectory(prefix="radar-mineru-checks-") as temp:
-        raw = bounded_process([str(Path(args.python).absolute()), "-E", "-s", "-B",
+        raw = bounded_process([str(Path(args.python).absolute()), "-E", "-S", "-B",
                                "-c", code, str(ROOT), *map(str, tests)], Path(temp))
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_bytes(raw)

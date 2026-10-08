@@ -167,3 +167,24 @@ aprovação do Evidence Kit. Não há motivo demonstrado para substituir pypdf a
 
 Referências técnicas: [seccomp/libseccomp](https://www.man7.org/linux/man-pages/man3/seccomp_rule_add.3.html),
 [limites de recursos Linux](https://www.man7.org/linux/man-pages/man2/setrlimit.2.html).
+# Revisão de 08/10/2026 — inicialização antes do isolamento
+
+O worker e o runner das regressões agora iniciam com `-E -S -B`.
+`-S` impede processamento automático de `site`, `.pth` e `sitecustomize`.
+Depois de instalar seccomp/rlimits, o bootstrap adiciona apenas os diretórios
+purelib/platlib do ambiente Python, sem `site.addsitedir` nem execução de hooks.
+No Python 3.12, o prefixo virtual é obtido pelo caminho lexical do executável,
+pois `-S` não configura esse prefixo. Instalação MinerU passa a ser regular,
+sem `-e`: instalações editáveis dependentes de `.pth` não são suportadas.
+
+O teste usa um virtualenv descartável com dois hooks inofensivos: as opções
+antigas acionam o marcador; o novo bootstrap e o caminho real de `run_case`
+não acionam. Um pacote fictício confere os limites e a negativa de socket ao
+ser importado. Sem acesso à rede ou documentos reais nesse teste.
+
+Validação: 23 testes de contratos/isolamento, seis negativas reais do worker e
+186 regressões selecionadas aprovados; versões fixadas e fontes conferidas.
+Isso fecha a janela de inicialização identificada, mas não cria sandbox de
+filesystem ou quota agregada. O resultado de qualidade e a decisão STUDY são
+independentes deste hardening e do CI; integração continua não aprovada.
+

@@ -15,6 +15,6 @@ for candidate_patch in "$experiment_dir"/patches/*.patch; do
   git -C "$source_dir" apply --check "$candidate_patch"
   git -C "$source_dir" apply "$candidate_patch"
 done
-"$python_bin" -m pip install -c "$experiment_dir/constraints.txt" -e "$source_dir" pypdf==6.19.0 pytest==9.1.1
+"$python_bin" -m pip install -c "$experiment_dir/constraints.txt" "$source_dir" pypdf==6.19.0 pytest==9.1.1
 "$python_bin" -m pip check
 echo 'Snapshot e três patches preparados; executar testes e experimento conforme README.'
