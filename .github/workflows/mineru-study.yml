@@ -1,0 +1,45 @@
+name: Estudo MinerU isolado
+on:
+  push:
+    branches: [study/mineru-flash-20261007, main]
+    paths: ['experiments/mineru/**', '.github/workflows/mineru-study.yml']
+  pull_request:
+    paths: ['experiments/mineru/**', '.github/workflows/mineru-study.yml']
+permissions:
+  contents: read
+jobs:
+  mineru-study:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Contratos e controles do worker
+        run: python3 -m unittest experiments.mineru.test_study -v
+      - name: Preparar ambiente e snapshot fixados
+        run: |
+          python3 -m venv "$RUNNER_TEMP/mineru-venv"
+          bash experiments/mineru/prepare.sh "$RUNNER_TEMP/mineru-source" "$RUNNER_TEMP/mineru-venv/bin/python"
+      - name: Regressões selecionadas dos três patches, sem rede
+        run: |
+          python3 -m experiments.mineru.patch_checks --python "$RUNNER_TEMP/mineru-venv/bin/python" --upstream "$RUNNER_TEMP/mineru-source" --output experiments/mineru/output/patch-checks.txt
+      - name: PDFs inválidos e limites reais
+        run: '"$RUNNER_TEMP/mineru-venv/bin/python" -m unittest experiments.mineru.test_worker -v'
+      - name: Comparar ambos os parsers, sem rede
+        run: |
+          python3 -m experiments.mineru.study --python "$RUNNER_TEMP/mineru-venv/bin/python" --output experiments/mineru/output/comparison.json
+      - name: Registrar resultado de qualidade sem promover integração
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          report = json.loads(Path('experiments/mineru/output/comparison.json').read_text())
+          assert report['execution_complete'] and not report['integration_approved']
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              summary.write('Experimento concluído; CI não é gate de qualidade nem autorização de integração.\n\n')
+              summary.write(f"Gate de qualidade: **{report['quality_gate_passed']}**; decisão: **STUDY**.\n\n")
+              for row in report['results']:
+                  m = row['metrics']
+                  summary.write(f"- {row['id']} / {row['engine']}: {m['critical_found']}/{m['critical_total']} campos críticos; revisão/OCR: {m['needs_review_or_ocr']}\n")
+          PY
