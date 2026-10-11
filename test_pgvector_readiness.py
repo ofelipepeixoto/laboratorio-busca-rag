@@ -1,4 +1,5 @@
 """Regressão de protocolo de inicialização; simulação local, não integração DB."""
+import json
 import subprocess
 import unittest
 from unittest.mock import patch
@@ -12,7 +13,11 @@ class ReadinessTests(unittest.TestCase):
 
         def fake_command(args, **kwargs):
             if args[1] == 'run':
+                state['execution'] = args[args.index('--label') + 1].split('=', 1)[1]
                 return 'synthetic-container\n'
+            if args[1] == 'inspect':
+                return json.dumps({'Id': 'a' * 64, 'Config': {'Labels': {
+                    'radar.pgvector.execution': state['execution']}}})
             if args[1] == 'rm':
                 state['cleanup'] = True
                 return 'synthetic-container\n'

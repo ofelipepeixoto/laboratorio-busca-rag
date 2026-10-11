@@ -13,6 +13,12 @@ python -m unittest -v test_busca.py
 
 Os casos de teste estão em `dados/perguntas.json`; o corpus está em `dados/documentos.json`. O workflow executa a comparação a cada alteração.
 
+### Limpeza do experimento pgvector
+
+O ciclo de limpeza inclui a inicialização de Docker. Antes de remover um container, confere a etiqueta única desta execução e usa seu ID imutável, preservando containers alheios e tolerando remoção anterior por `--rm`. Falha de limpeza preserva o erro original com uma nota; após sucesso do experimento, ela é reportada como erro. Cada comando continua limitado a 60 segundos. Se o daemon estiver indisponível ou concluir a criação somente após a inspeção, a remoção não pode ser garantida.
+
+Reprodução sintética: `python -m unittest -v test_pgvector_cleanup`. Na base `7960645d`, timeout do `docker run` resultou em zero tentativas de remoção. Na correção, o mock confirma inspeção e uma remoção apenas do ID com etiqueta correspondente. Os 11 testes cobrem startup, readiness, consulta, sucesso, ausência, colisão, remoção concorrente e falhas de cleanup, sem iniciar Docker. Não foi observado container órfão real nesta reprodução.
+
 ## Resultado inicial
 
 | Método | Acertos nos 6 casos |
