@@ -62,16 +62,35 @@ def command(args, **kwargs):
     return subprocess.run(args, check=True, text=True, capture_output=True, timeout=60, **kwargs).stdout
 
 
+def cleanup_container(name, execution):
+    """Remove only this execution's labelled container, by immutable Docker ID."""
+    target = name
+    try:
+        info = json.loads(command(['docker', 'inspect', '--type', 'container', '--format', '{{json .}}', name]))
+        if (info['Config'].get('Labels') or {}).get('radar.pgvector.execution') != execution:
+            return  # A name collision must never delete another execution's container.
+        target = info['Id']
+        if len(target) != 64 or any(c not in '0123456789abcdef' for c in target):
+            raise ValueError('ID de container inválido')
+        command(['docker', 'rm', '--force', target])
+    except subprocess.CalledProcessError as error:
+        # --rm may already have removed it, including between inspect and rm.
+        if not any(f'No such {kind}: {target}' in (error.stderr or '') for kind in ('object', 'container')):
+            raise
+
+
 def run(questions=None):
     documents = carregar('documentos.json')
     questions = (carregar('perguntas.json') + [{'pergunta': 'Qual é a cor do logotipo?', 'esperado': None}]
                  if questions is None else questions)
-    name = 'rag-pgvector-' + uuid.uuid4().hex[:12]
+    execution = uuid.uuid4().hex
+    name = 'rag-pgvector-' + execution[:12]
+    failure = None
     # Não aceita DSN, nome de container existente, senha externa ou endereço de produção.
-    command(['docker', 'run', '--detach', '--rm', '--network', 'none', '--memory', '512m',
-             '--cpus', '1', '--name', name, '--tmpfs', '/var/lib/postgresql/data',
-             '-e', 'POSTGRES_HOST_AUTH_METHOD=trust', IMAGE])
     try:
+        command(['docker', 'run', '--detach', '--rm', '--network', 'none', '--memory', '512m',
+                 '--cpus', '1', '--name', name, '--label', f'radar.pgvector.execution={execution}',
+                 '--tmpfs', '/var/lib/postgresql/data', '-e', 'POSTGRES_HOST_AUTH_METHOD=trust', IMAGE])
         for _ in range(60):
             try:
                 # Initdb usa servidor temporário só em socket Unix. TCP loopback
@@ -101,8 +120,16 @@ def run(questions=None):
                   'scores': {m: sum(row[m] == row['esperado'] for row in rows)
                              for m in ('literal', 'equivalencias', 'pgvector')}, 'total': len(rows)}
         return report
+    except BaseException as error:
+        failure = error
+        raise
     finally:
-        command(['docker', 'rm', '--force', name])
+        try:
+            cleanup_container(name, execution)
+        except Exception as error:
+            if failure is None:
+                raise
+            failure.add_note(f'Limpeza do container {name} não confirmada ({type(error).__name__}).')
 
 
 if __name__ == '__main__':
