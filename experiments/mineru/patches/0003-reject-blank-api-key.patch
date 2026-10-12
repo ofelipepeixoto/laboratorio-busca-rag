@@ -1,0 +1,13 @@
+--- a/mineru/parser/api_server.py
++++ b/mineru/parser/api_server.py
+@@ -2357,7 +2357,9 @@
+     effort = effort_for_tier(tier)
+     vlm_config = (vlm_config if vlm_config is not None else mineru_config.model.vlm).model_copy(deep=True)
+     _preflight_tier_dependencies(tier, vlm_config)
+-    _api_key: str | None = api_key or None
++    if api_key is not None and (not isinstance(api_key, str) or not api_key.strip() or api_key != api_key.strip()):
++        raise ValueError("api_key must be non-empty and must not contain surrounding whitespace")
++    _api_key: str | None = api_key
+     _upload_dir = pathlib.Path(upload_dir) if upload_dir else pathlib.Path(tempfile.mkdtemp(prefix="mineru_"))
+     _upload_dir.mkdir(parents=True, exist_ok=True)
+     if max_inline_bytes < 0:
