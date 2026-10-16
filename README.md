@@ -112,3 +112,7 @@ A inicialização agora espera TCP em `127.0.0.1` e usa o mesmo host no psql.
 O servidor temporário de initdb pode aceitar socket Unix antes do restart final;
 essa condição foi observada na primeira CI composta. A regressão de protocolo
 reproduz a falha anterior sob simulação e conserva o teste real como gate.
+
+## Estudo legislativo opcional
+
+[Contrato e replay sintético](studies/legislativo/README.md): famílias, versões, hash e abstenção com escopo explícito. Sem leis reais, modelo ou publicação automática; preserva a busca padrão.
